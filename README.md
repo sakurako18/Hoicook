@@ -28,4 +28,4 @@
 -
 
 ## 実装機能リストのURL
-https://docs.google.com/spreadsheets/d/1vlMj44DnbI8Gn3rLJbRwRg8x5Aq9---w87EJXvPpN1c/edit#gid=885378170
+https://docs.google.com/spreadsheets/d/1vlMj44DnbI8Gn3rLJbRwRg8x5Aq9---w87EJXvPpN1c/edit?usp=sharing
