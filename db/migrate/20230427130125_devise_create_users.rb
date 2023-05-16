@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :encrypted_password, null: false, default: ""
 
       ## RecoverableS
-      t.string   :reset_password_tokenSSS
+      t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
       ## Rememberable
@@ -35,8 +35,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :user_name
       t.string :last_name
       t.string :first_name
-      t.string :email
-      t.string :encrypted_password
       t.boolean :is_deleted
 
       t.timestamps null: false

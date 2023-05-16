@@ -1,4 +1,81 @@
-<h1>レシピ新規投稿</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-offset-3 col-xs-6">
+      <h3>レシピ新規登録</h3>
 
+      <%=form_with model: @recipe,url: admin_recipes_path, method: :post do |f| %>
 
+      <table class=table-borderess>
 
+        <tr>
+        <td><%= f.label :"レシピ画像" %></td>
+        <td><%= f.file_field :image, accept: "image/*" %></td>
+        </tr>
+
+        <tr>
+        <td><%= f.label :"レシピ名" %></td>
+        <td><%= f.text_field :name, size: "40x5" %></td>
+        </tr>
+
+        <tr>
+        <td><%= f.label :"説明" %></td>
+        <td><%= f.text_area :introduction, placeholder: "レシピの説明", size: "40x10" %></td>
+        </tr>
+
+        <tr>
+        <td><%= f.label :"目安人数" %></td>
+        <td><%= f.text_field :number_of_people, placeholder: "（例）2", size: "7x5" %>人分</td>
+        </tr>
+
+        <tr>
+        <td><%= f.label :"材料" %></td>
+        <td>
+          <div class="recipe-post">
+          <!--< %=form_with model: @recipe,url: admin_recipes_path, local: true, method: :post do |f| %>-->
+          <div class="recipe-ingredients">
+
+          <div class="mx-auto">
+            <%= f.fields_for :recipe_ingredients do |t| %>
+              <%= render "admin/recipes/recipe_ingredient_fields", f: t %>
+            <% end %>
+          </div>
+
+          <div id="detail-association-insertion-point"></div>
+
+          <div class="col-10 mx-auto mt-2">
+            <%= link_to_add_association "追加", f, :recipe_ingredients,
+            class: "btn btn-primary",
+            data: {
+            association_insertion_node: '#detail-association-insertion-point',
+            association_insertion_method: 'after'
+            }%>
+          </div>
+          </div>
+          </div>
+        </td>
+        <!--< % end %>-->
+        </tr>
+
+        <tr>
+          <td><%= f.label :"作り方" %></td>
+          <td><%= f.text_area :how_to_make, placeholder: "（例）1.野菜を5センチ角に切る など…", size: "40x10" %></td>
+        </tr>
+
+        <tr>
+          <td><%= f.label :"ジャンル" %></td>
+          <td><%= f.collection_select :genre_id, @genres, :id, :name, {prompt: "選択してください"} %></td>
+        </tr>
+
+        <tr>
+          <td><%= f.label :"投稿ステータス" %></td>
+          <td><%= f.radio_button :post_status, :true %>公開
+          <%= f.radio_button :post_status, :false %>非公開
+          </td>
+        </tr>
+
+      </table>
+      <%= f.submit "新規登録", class: "btn btn-success" %>
+<% end %>
+      </div>
+    </div>
+  </div>

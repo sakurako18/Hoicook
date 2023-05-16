@@ -1,4 +1,60 @@
-<h1>レシピ詳細</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-xl-12">
+      <h2></h2><br>
+    </div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 col-xl-5">
+      <%= link_to user_recipe_path(@recipe.id) do %>
+        <%= image_tag @recipe.image, size:"300x300", fallback: 'no_image.png' %>
+      <% end %>
+    </div>
+    <div class="col-md-7">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><%= @recipe.name %></td>
+          </tr>
+          <tr>
+            <td>説明</td>
+            <td><%= @recipe.introduction %></td>
+          </tr>
+          <tr>
+            <td>目安人数</td>
+            <td><%= @recipe.number_of_people %></td>
+          </tr>
+          <tr>
+            <td>材料</td>
+            <td><%= @recipe.recipe_ingredients %></td>
+          </tr>
+          <tr>
+            <td>作り方</td>
+            <td><%= @recipe.how_to_make %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td><%= @recipe.genre_id %></td>
+          </tr>
+          <tr>
+            <td>投稿ステータス</td>
+            <td>
+            <% if @recipe.post_status == true %>
+              公開中
+            <% else %>
+              非公開中
+            <% end %>
 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="col-md-offset-1">
+        <%= link_to "編集する" , edit_user_recipe_path(@recipe), class:"btn btn-lg btn-success" %>
+      </div>
+    </div>
+  </div>
+</div>
 

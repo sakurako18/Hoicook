@@ -1,4 +1,81 @@
-<h1>レシピ編集</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
 
 
+      <%=form_with model: @recipe, url: user_recipe_path do |f| %>
 
+    <div class="col-xs-5">
+     <h2>レシピ編集</h2>
+
+    </div>
+
+    <br><br><br>
+      <div class="col-xs-5 col-xs-offset-2">
+        <table class="edit-form-table">
+          <tbody>
+
+            <tr>
+              <th>画像
+              </th>
+                <td>
+                  <%= image_tag @recipe.image, size:"300x300", fallback: 'no_image.png' %>
+                </td>
+            </tr>
+
+            <tr>
+              <th>レシピ名
+              </th>
+              <td><%= f.text_field :name %>
+              </td>
+            </tr>
+
+            <tr>
+              <th>説明</th>
+              <td><%= f.text_area :introduction %>
+              </td>
+            </tr>
+
+            <tr>
+              <th>目安人数</th>
+              <td>
+                <%= f.text_field :number_of_people %>
+              </td>
+            </tr>
+
+            <tr>
+              <th>材料</th>
+              <td>
+                <%= f.text_field :ingredient %> <%= f.text_field :ingredient_amount %>
+              </td>
+            </tr>
+
+            <tr>
+              <th>作り方</th>
+              <td>
+                <%= f.text_area :how_to_make %>
+              </td>
+            </tr>
+
+            <tr>
+              <th>ジャンル</th>
+              <td>
+                <%= f.collection_select :genre_id, @genres, :id, :name, {prompt: "選択してください"} %>
+              </td>
+            </tr>
+
+            <tr>
+              <th>投稿ステータス</th>
+              <td><%= f.radio_button :post_status, :true %>公開中
+                  <%= f.radio_button :post_status, :false %>非公開中
+              </td>
+            </tr>
+
+        <div class="text-right">
+        <%= f.submit "変更を保存" ,class: "btn btn-primary text-right" %>
+        </div>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>

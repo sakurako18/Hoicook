@@ -12,66 +12,69 @@
 
     <body class="d-flex flex-column vh-100">
       <header class="shadow-sm">
-        <p>ひとくち食べるきっかけに</p>
 
-        <div class="container">
-          <a class="navbar-brand p-3" href="/">
-            <%= link_to root_path do %>
-            <%= image_tag 'logo.png', size: '120x120' %>
-          </a>
-        <% end %>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container">
+            <div class="text-center mb-3 mb-lg-0">
+              <span class="d-block">ひとくち食べるきっかけに</span>
+              <%= link_to root_path, class:"navbar-brand" do %>
+                <%= image_tag 'logo.png', size: '120x120' %>
+              <% end %>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-          <div class="row">
-          <div class="col-md-12 col-xl-12">
-          <nav class="navbar navbar-expand-lg navbar-light">
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                  <% if admin_signed_in? %>
-                    <li class="nav-item">
-                      <%= link_to "レシピ一覧", admin_recipes_path, class: 'btn btn-outline-secondary' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "ユーザー一覧", admin_members_path, class: 'btn btn-outline-secondary ml-2' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "コメント一覧", admin_path, class: 'btn btn-outline-secondary ml-2' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "ジャンル一覧", admin_genres_path, class: 'btn btn-outline-secondary ml-2' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "ログアウト", new_admin_session_path, method: :delete, class: 'btn btn-outline-secondary ml-2' %>
-                    </li>
+              <ul class="navbar-nav ml-auto">
+                <% if admin_signed_in? %>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "レシピ一覧", admin_recipes_path, class: 'btn btn-outline-secondary btn-sm' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "ユーザー一覧", admin_members_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "コメント一覧", admin_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "ジャンル一覧", admin_genres_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                  </li>
 
-                  <% else if user_signed_in? %>
-                    <li class="nav-item">
-                      <%= link_to "マイページ", user_path, class: 'btn btn-outline-secondary' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "レシピ一覧", user_recipes_path, class: 'btn btn-outline-secondary ml-2' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "レシピの投稿", new_user_recipe_path, class: 'btn btn-outline-secondary ml-2' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "ログアウト", root_path, method: :delete, class: 'btn btn-outline-secondary ml-2' %>
-                    </li>
+                <% elsif user_signed_in? %>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "マイページ", user_path, class: 'btn btn-outline-secondary btn-sm' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "レシピ一覧", user_recipes_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "レシピの投稿", new_user_recipe_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                  </li>
 
-                  <% else %>
-                    <li class="nav-item">
-                      <%= link_to "トップページ", root_path, class: 'btn btn-outline-secondary' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "レシピ", user_recipes_path, class: 'btn btn-outline-secondary ml-2' %>
-                    </li>
-                  <% end %>
-                </ul>
+                <% else %>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "トップページ", root_path, class: 'btn btn-outline-secondary btn-sm' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "レシピ", user_recipes_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0" %>
+                  </li>
+                  <li class="nav-item ml-auto">
+                    <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0" %>
+                  </li>
                 <% end %>
-                </ul>
-              </div>
-          </nav>
-          </div>
+              </ul>
+            </div>
           </div>
         </div>
       </header>
