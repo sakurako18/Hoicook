@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
     root :to => "user/homes#top"
+    get "search" => "searches#search"
 
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "user/registrations",
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   namespace :user do
     get "/" => "homes#top"
     get "/about" => "homes#about"
+    get "/user_index" => "recipes#user_index"
 
     resources :recipes, only: [:index, :new, :create, :show, :edit, :update] do
       resource :favorites, only: [:create, :destroy]

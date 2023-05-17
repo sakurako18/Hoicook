@@ -1,7 +1,13 @@
 class User::RecipesController < ApplicationController
 
   def index
-    @recipes = Recipe.page(params[:page])
+    @recipes = Recipe.where(post_status: true).page(params[:page])
+    @recipe = Recipe.all
+
+  end
+
+  def user_index
+  @recipes = Recipe.page(params[:page])
 
   end
 
@@ -28,6 +34,7 @@ class User::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @user = @recipe.user
 
   end
 
@@ -49,7 +56,7 @@ class User::RecipesController < ApplicationController
   private
   def recipe_params
     params.require(:recipe).permit(:image, :name, :introduction, :number_of_people, :how_to_make, :genre_id, :post_status,
-                                  recipe_ingredients_attributes:[:ingredient, :ingredient_amount, :_destroy])
+                                  recipe_ingredients_attributes:[:id, :ingredient, :ingredient_amount, :_destroy])
   end
 
 

@@ -1,3 +1,99 @@
+<div class="container my-5">
+  <h3>レシピ編集</h3>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag @recipe.image, size:"300x300", fallback: 'no_image.png', class: 'img-fluid' %>
+    </div>
+    <div class="col-md-8">
+
+      <%= form_with model: @recipe, url: user_recipe_path do |f| %>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :name, 'レシピ名' %>
+              <%= f.text_field :name, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :number_of_people, '目安人数' %>
+              <%= f.number_field :number_of_people, class: 'form-control', min: 1 %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :introduction, '説明' %>
+          <%= f.text_area :introduction, rows: 5, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <label>材料</label>
+          <div class="recipe-post">
+              <!--< %=form_with model: @recipe,url: admin_recipes_path, local: true, method: :post do |f| %>-->
+              <div class="recipe-ingredients">
+
+                <div class="mx-auto">
+                  <%= f.fields_for :recipe_ingredients do |t| %>
+                    <%= render "user/recipes/recipe_ingredient_fields", f: t %>
+                  <% end %>
+                </div>
+
+                <div id="detail-association-insertion-point"></div>
+
+                <div class="row">
+                  <div class="col-md-4 mx-auto">
+                    <%= link_to_add_association "追加", f, :recipe_ingredients,
+                      class: "btn btn-primary btn-block",
+                      data: {
+                        association_insertion_node: '#detail-association-insertion-point',
+                        association_insertion_method: 'after'
+                      }
+                    %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :how_to_make, '作り方' %>
+          <%= f.text_area :how_to_make, rows: 10, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :genre, 'ジャンル' %>
+          <%= f.collection_select :genre_id, @genres, :id, :name, {prompt: "選択してください"}, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :status, 'ステータス', class: 'mr-3' %>
+
+          <label class="mr-3">
+            <%= f.radio_button :post_status, :true %> 公開中
+          </label>
+          <label>
+            <%= f.radio_button :post_status, :false %> 非公開中
+          </label>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mx-auto">
+            <%= f.submit "変更を保存" ,class: "btn btn-primary btn-block" %>
+          </div>
+        </div>
+
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
   <div class="container">
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1">
@@ -46,7 +142,28 @@
             <tr>
               <th>材料</th>
               <td>
-                <%= f.text_field :ingredient %> <%= f.text_field :ingredient_amount %>
+                <div class="recipe-post">
+          <!--< %=form_with model: @recipe,url: admin_recipes_path, local: true, method: :post do |f| %>-->
+          <div class="recipe-ingredients">
+
+          <div class="mx-auto">
+            <%= f.fields_for :recipe_ingredients do |t| %>
+              <%= render "admin/recipes/recipe_ingredient_fields", f: t %>
+            <% end %>
+          </div>
+
+          <div id="detail-association-insertion-point"></div>
+
+          <div class="col-10 mx-auto mt-2">
+            <%= link_to_add_association "追加", f, :recipe_ingredients,
+            class: "btn btn-primary",
+            data: {
+            association_insertion_node: '#detail-association-insertion-point',
+            association_insertion_method: 'after'
+            }%>
+          </div>
+          </div>
+          </div>
               </td>
             </tr>
 
@@ -66,8 +183,7 @@
 
             <tr>
               <th>投稿ステータス</th>
-              <td><%= f.radio_button :post_status, :true %>公開中
-                  <%= f.radio_button :post_status, :false %>非公開中
+              <td>
               </td>
             </tr>
 

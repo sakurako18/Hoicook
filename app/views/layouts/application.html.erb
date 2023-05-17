@@ -50,7 +50,7 @@
                     <%= link_to "マイページ", user_path, class: 'btn btn-outline-secondary btn-sm' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "レシピ一覧", user_recipes_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "レシピ一覧", user_user_index_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
                     <%= link_to "レシピの投稿", new_user_recipe_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
@@ -75,6 +75,29 @@
                 <% end %>
               </ul>
             </div>
+
+<!--<table class="table table-hover table-inverse">-->
+  <!--検索対象モデルがUserの時 -->
+<!--  < % if @recipe == "Recipe" %>-->
+<!--    <tbody>-->
+<!--      < % @recipes.each do |recipe| %>-->
+<!--        <tr>-->
+<!--          <td>< %= recipe.name %></td>-->
+<!--        </tr>-->
+<!--      < % end %>-->
+<!--    </tbody>-->
+<!--  < % else %>-->
+    <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+<!--    <tbody>-->
+<!--      < % @ingredients.each do |ingredient| %>-->
+<!--        <tr>-->
+<!--          <td>< %= ingredient %></td>-->
+<!--        </tr>-->
+<!--      < % end %>-->
+<!--    </tbody>-->
+<!--  < % end %>-->
+<!--</table>-->
+
           </div>
         </div>
       </header>

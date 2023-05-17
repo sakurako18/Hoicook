@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
 
   belongs_to :user
+  belongs_to :genre
   # belongs_to :admin
   has_one_attached :image
   has_many :comments, dependent: :destroy
@@ -16,5 +17,19 @@ class Recipe < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+# 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @recipe = Recipe.where("name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @recipe = Recipe.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @recipe = Recipe.where("name LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @recipe = Recipe.where("name LIKE?","%#{word}%")
+    else
+      @recipe = Recipe.all
+    end
+  end
 
 end

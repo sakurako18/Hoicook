@@ -1,9 +1,25 @@
+<!--<div class="nested-fields">-->
+<!--  <div class="row mx-auto">-->
+<!--    <div class="col-5"><%= f.text_field :ingredient, class: "form-control", placeholder: "(例)にんじん" %></div>-->
+<!--    <div class="offset-1 col-2"><%= f.text_field :ingredient_amount, class: "form-control", placeholder: "1本" %></div>-->
+<!--    <div class="offset-1 col-1 px-0 w-auto">-->
+<!--      <%= link_to_remove_association "×", f, class: "btn btn-secondary btn-danger" %>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
 <div class="nested-fields">
-  <div class="row mx-auto">
-    <div class="col-5"><%= f.text_field :ingredient, class: "form-control", placeholder: "(例)にんじん" %></div>
-    <div class="offset-1 col-2"><%= f.text_field :ingredient_amount, class: "form-control", placeholder: "1本" %></div>
-    <div class="offset-1 col-1 px-0 w-auto">
-      <%= link_to_remove_association "×", f, class: "btn btn-secondary btn-danger" %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-6">
+        <%= f.text_field :ingredient, class: "form-control", placeholder: "(例)にんじん" %>
+      </div>
+      <div class="col-4">
+        <%= f.text_field :ingredient_amount, class: "form-control", placeholder: "1本" %>
+      </div>
+      <div class="col-2 text-center">
+        <%= link_to_remove_association "×", f, class: "btn btn-secondary btn-danger btn-sm" %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,21 +1,21 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 col-xl-12">
-      <h2></h2><br>
+      <h3></h3><br>
     </div>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-5 col-xl-5">
+    <div class="col-md-3">
       <%= link_to user_recipe_path(@recipe.id) do %>
-        <%= image_tag @recipe.image, size:"300x300", fallback: 'no_image.png' %>
+        <%= image_tag @recipe.image, size:"300x300", fallback: 'no_image.png', class: 'img-fluid' %>
       <% end %>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-9">
       <table class="table">
         <tbody>
           <tr>
-            <td><%= @recipe.name %></td>
+            <td colspan="2"><%= @recipe.name %></td>
           </tr>
           <tr>
             <td>説明</td>
@@ -27,15 +27,19 @@
           </tr>
           <tr>
             <td>材料</td>
-            <td><%= @recipe.recipe_ingredients %></td>
+            <td>
+              <% @recipe.recipe_ingredients.each do |ri| %>
+                <%= ri.ingredient %> (<%= ri.ingredient_amount %>)
+              <% end %>
+            </td>
           </tr>
           <tr>
             <td>作り方</td>
-            <td><%= @recipe.how_to_make %></td>
+            <td><%= simple_format(@recipe.how_to_make) %></td>
           </tr>
           <tr>
             <td>ジャンル</td>
-            <td><%= @recipe.genre_id %></td>
+            <td><%= @recipe.genre.name %></td>
           </tr>
           <tr>
             <td>投稿ステータス</td>
