@@ -11,10 +11,10 @@ Hoicookでは、<br>
 <%= link_to "新規登録", new_user_registration_path, class: "col-xs-12 btn btn-primary"%>
 <%= link_to "ログイン", new_user_session_path, class: "col-xs-12 btn btn-success"%><br>
 
-ゲストログインでは、投稿、コメント、いいね機能（上限5件まで）が使えますが、<br>
+ゲストログインでは、投稿、コメント、いいね機能が使えますが、<br>
 ログアウト時に全て削除されます。<br>
 
-<%= link_to "ゲストログイン", root_path, class: "col-xs-12 btn btn-secondary"%>
+<%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "login col-xs-12 btn btn-secondary"%>
 
 
     </div>

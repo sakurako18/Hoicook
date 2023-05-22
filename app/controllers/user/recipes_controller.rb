@@ -7,8 +7,8 @@ class User::RecipesController < ApplicationController
   end
 
   def user_index
-  @recipes = Recipe.page(params[:page])
-
+    @recipes = Recipe.page(params[:page])
+    @genres = Genre.all
   end
 
   def new
@@ -35,7 +35,7 @@ class User::RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
     @user = @recipe.user
-
+    # @comment = Comment.new
   end
 
   def edit

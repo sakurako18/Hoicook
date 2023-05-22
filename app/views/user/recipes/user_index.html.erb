@@ -11,6 +11,7 @@
           <thead>
             <tr>
               <th>レシピID</th>
+              <th>画像</th>
               <th>レシピ名</th>
               <th>ジャンル</th>
               <th>投稿ステータス</th>
@@ -20,6 +21,7 @@
             <% @recipes.order("id DESC").each do |recipe| %>
               <tr>
                 <td><%= recipe.id %></td>
+                <td><%= image_tag recipe.image, size: '100x100' %></td>
                 <td><%= link_to user_recipe_path(recipe), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" do %>
                   <%= recipe.name %>
                   <% end %></td>

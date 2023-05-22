@@ -4,7 +4,7 @@ class Recipe < ApplicationRecord
   belongs_to :genre
   # belongs_to :admin
   has_one_attached :image
-  has_many :comments, dependent: :destroy
+  # has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :recipe_ingredients, dependent: :destroy
   has_many :how_to_makes, dependent: :destroy
@@ -17,7 +17,6 @@ class Recipe < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
-# 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
       @recipe = Recipe.where("name LIKE?", "#{word}")

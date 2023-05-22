@@ -13,7 +13,7 @@
     <body class="d-flex flex-column vh-100">
       <header class="shadow-sm">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container">
             <div class="text-center mb-3 mb-lg-0">
               <span class="d-block">ひとくち食べるきっかけに</span>
@@ -50,10 +50,10 @@
                     <%= link_to "マイページ", user_path, class: 'btn btn-outline-secondary btn-sm' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "レシピ一覧", user_user_index_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "My レシピ", user_user_index_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "レシピの投稿", new_user_recipe_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "レシピ一覧", user_recipes_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
                     <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
@@ -76,27 +76,37 @@
               </ul>
             </div>
 
-<!--<table class="table table-hover table-inverse">-->
+<h2>Results index</h2>
+
+<table class="table table-hover table-inverse">
   <!--検索対象モデルがUserの時 -->
-<!--  < % if @recipe == "Recipe" %>-->
-<!--    <tbody>-->
-<!--      < % @recipes.each do |recipe| %>-->
-<!--        <tr>-->
-<!--          <td>< %= recipe.name %></td>-->
-<!--        </tr>-->
-<!--      < % end %>-->
-<!--    </tbody>-->
-<!--  < % else %>-->
+  <% if @range == "Racipe" %>
+    <tbody>
+      <% @racipes.each do |racipe| %>
+        <tr>
+          <td><%= racipe.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
     <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
-<!--    <tbody>-->
-<!--      < % @ingredients.each do |ingredient| %>-->
-<!--        <tr>-->
-<!--          <td>< %= ingredient %></td>-->
-<!--        </tr>-->
-<!--      < % end %>-->
-<!--    </tbody>-->
-<!--  < % end %>-->
-<!--</table>-->
+    <tbody>
+      <% @recipe_ingredients.each do |recipe_ingredient| %>
+        <tr>
+          <td><%= racipe.ingredient %></td>
+          <td><%= racipe.ingredient_amount %></td>
+        </tr>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
+            <!--< %= form_tag({controller:"recipes",action:"index"}, method: :get) do %>-->
+            <!--< %= text_field_tag :search %>-->
+            <!--< %= submit_tag '検索する' %>-->
+
+            <!--< % end %>-->
+
 
           </div>
         </div>

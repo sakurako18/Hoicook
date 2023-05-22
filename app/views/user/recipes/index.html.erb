@@ -9,54 +9,11 @@
     <div class="col-3">
       <%= link_to user_recipe_path(recipe.id) do %>
       <%= image_tag recipe.image, size: '200x200' %>
+      <!--, style: "max-width: 100%; height: auto"-->
       <% end %>
-      <div></div>
-      <%= recipe.name %>
-      <div></div>
-    <%= recipe.genre.name %>
+
+      <div><%= recipe.name %></div>
+      <div><%= recipe.genre.name %></div>
     </div>
+
         <% end %>
-
-
-
-
-  <!--<div class="container">-->
-  <!--  <div class="row">-->
-  <!--    <div class="col-md-12 col-xl-12">-->
-  <!--    <h3>レシピ一覧</h3>-->
-
-  <!--    <div class="text-right">-->
-  <!--        < %= link_to "新規登録", new_user_recipe_path, class:"btn btn-lg btn-success" %>-->
-  <!--    </div>-->
-
-  <!--      <table class="table">-->
-  <!--        <thead>-->
-  <!--          <tr>-->
-  <!--            <th>レシピID</th>-->
-  <!--            <th>レシピ名</th>-->
-  <!--            <th>ジャンル</th>-->
-  <!--            <th>投稿ステータス</th>-->
-  <!--          </tr>-->
-  <!--        </thead>-->
-  <!--        <tbody>-->
-  <!--          < % @recipes.order("id DESC").each do |recipe| %>-->
-  <!--            <tr>-->
-  <!--              <td>< %= recipe.id %></td>-->
-  <!--              <td>< %= link_to user_recipe_path(recipe), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" do %>-->
-  <!--                < %= recipe.name %>-->
-  <!--                < % end %></td>-->
-  <!--              <td>< %= recipe.genre.name %></td>-->
-  <!--              <td>< % if recipe.post_status == true %>-->
-  <!--                    公開中-->
-  <!--                  < % else %>-->
-  <!--                    非公開中-->
-  <!--                  < % end %></td>-->
-  <!--            </tr>-->
-  <!--          < % end %>-->
-  <!--        </tbody>-->
-  <!--      </table>-->
-  <!--        </div>-->
-  <!--        < %= paginate @recipes, style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
