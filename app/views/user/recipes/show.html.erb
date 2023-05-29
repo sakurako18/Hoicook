@@ -8,7 +8,12 @@
   <div class="row">
     <div class="col-md-3">
       <%= link_to user_recipe_path(@recipe.id) do %>
-        <%= image_tag @recipe.image, size:"300x300", fallback: 'no_image.png', class: 'img-fluid' %>
+        <% if @recipe.image.attached? %>
+          <%= image_tag @recipe.image, size:"300x300", fallback: 'no_image.png', class: 'img-fluid' %>
+        <% else %>
+          <%= image_tag 'no_image.png', size: '300x300' %>
+        <% end %>
+
       <% end %>
     </div>
     <div class="col-md-9">
@@ -60,20 +65,35 @@
       </div>
 
 
-<!--<div>-->
-<!--  <p>コメント件数：< %= @recipe.comments.count %></p>-->
-<!--  < % @recipe.comments.each do |comment| %>-->
-    <!--<p>< %= image_tag post_comment.user.get_profile_image(100,100) %></p>-->
-<!--    < %= comment.user.name %>-->
-<!--    < %= comment.created_at.strftime('%Y/%m/%d') %>< %= comment.comment %>-->
-<!--  < % end %>-->
-<!--</div>-->
-<!--<div>-->
-<!--  < %= form_with model: [@recipe, @comment] do |f| %>-->
-<!--    < %= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>-->
-<!--    < %= f.submit "送信する" %>-->
-<!--  < % end %>-->
-<!--</div>-->
+<div>
+  <p>コメント件数：<%= @recipe.comments.count %></p>
+
+  <% if @recipe.favorited_by?(current_user) %>
+    <p>
+      <%= link_to user_recipe_favorites_path(@recipe), method: :delete do %>
+        ♥<%= @recipe.favorites.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to user_recipe_favorites_path(@recipe), method: :post do %>
+        ♡<%= @recipe.favorites.count %>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% @recipe.comments.each do |comment| %>
+    <p><%#= image_tag comment.user.get_profile_image(100,100) %></p>
+    <%= comment.user.user_name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@recipe, @comment], url: user_recipe_comments_path(@recipe.id) do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
 
 
     </div>

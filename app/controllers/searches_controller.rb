@@ -5,9 +5,14 @@ class SearchesController < ApplicationController
     @range = params[:range]
 
     if @range == "Recipe"
-      @recipes = Recipe.looks(params[:search], params[:word])
+      @recipes = Recipe.looks(params[:word])
     else
-      @recipe_ingredients = RecipeIngredient.looks(params[:search], params[:word])
+      @recipe_ingredients = RecipeIngredient.looks(params[:word])
+      @recipes = @recipe_ingredients.map {|ingredient| ingredient.recipe}
     end
+
+    # @recipes
+
+    render "user/recipes/index"
   end
 end

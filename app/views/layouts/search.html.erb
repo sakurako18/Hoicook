@@ -1,0 +1,25 @@
+<h2>Results index</h2>
+
+<table class="table table-hover table-inverse">
+  <!--検索対象モデルがRacipeの時 -->
+  <% if @range == "Racipe" %>
+    <tbody>
+      <% @racipes.each do |racipe| %>
+        <tr>
+          <td><%= racipe.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    <!--検索対象モデルがRecipeではない時(= 検索対象モデルが材料の時) -->
+    <tbody>
+      <% @recipe_ingredients.each do |recipe_ingredient| %>
+        <tr>
+          <td><%= racipe.ingredient %></td>
+          <td><%= racipe.ingredient_amount %></td>
+        </tr>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>

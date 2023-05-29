@@ -6,9 +6,13 @@
 
       <% @recipes.each do |recipe| %>
 
-    <div class="col-3">
+    <div class="col-md-3 p-4">
       <%= link_to user_recipe_path(recipe.id) do %>
-      <%= image_tag recipe.image, size: '200x200' %>
+      <% if recipe.image.attached? %>
+        <%= image_tag recipe.image, class: 'img-fluid', style: 'width: 100%; height: 200px; object-fit: cover;' %>
+      <% else %>
+        <%= image_tag 'no_image.png', class: 'img-fluid', style: 'width: 100%; height: 200px; object-fit: cover;' %>
+      <% end %>
       <!--, style: "max-width: 100%; height: auto"-->
       <% end %>
 

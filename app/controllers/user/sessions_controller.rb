@@ -21,6 +21,8 @@ class User::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
    def destroy
+     # Guestユーザーのメールアドレスが変更になった場合は、以下を編集
+     current_user.recipes.destroy_all if current_user.email == "aaa@aaa.com"
      super
    end
 

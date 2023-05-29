@@ -4,18 +4,8 @@ class RecipeIngredient < ApplicationRecord
     validates :ingredient, presence: true
     validates :ingredient_amount, presence: true
 
-  def self.looks(search, word)
-    if search == "perfect_match"
-      @recipe_ingredient = RecipeIngredient.where("title LIKE?","#{word}")
-    elsif search == "forward_match"
-      @recipe_ingredient = RecipeIngredient.where("title LIKE?","#{word}%")
-    elsif search == "backward_match"
-      @recipe_ingredient = RecipeIngredient.where("title LIKE?","%#{word}")
-    elsif search == "partial_match"
-      @recipe_ingredient = RecipeIngredient.where("title LIKE?","%#{word}%")
-    else
-      @recipe_ingredient = RecipeIngredient.all
-    end
+  def self.looks(word)
+      @recipe_ingredient = RecipeIngredient.where("ingredient LIKE?","%#{word}%")
   end
 
 end

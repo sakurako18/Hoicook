@@ -2,7 +2,7 @@ class User::RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.where(post_status: true).page(params[:page])
-    @recipe = Recipe.all
+    #@recipe = Recipe.all
 
   end
 
@@ -19,23 +19,24 @@ class User::RecipesController < ApplicationController
   end
 
   def create
-      #byebug
       @recipe = Recipe.new(recipe_params)
+      # filtering ingredients with empty attaribute ingredient and ingredient_amount
+      @recipe.recipe_ingredients = @recipe.recipe_ingredients.filter{|ingredient| ingredient.ingredient.present? && ingredient.ingredient_amount.present? }
       @recipe.user_id = current_user.id
       @genres = Genre.all
     if @recipe.valid?
       @recipe.save
-    redirect_to user_recipe_path(@recipe.id)
+      redirect_to user_recipe_path(@recipe.id)
     else
-    render :new
-
+      render :new
     end
+
   end
 
   def show
     @recipe = Recipe.find(params[:id])
     @user = @recipe.user
-    # @comment = Comment.new
+    @comment = Comment.new
   end
 
   def edit

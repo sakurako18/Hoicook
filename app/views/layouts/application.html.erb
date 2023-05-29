@@ -17,10 +17,11 @@
           <div class="container">
             <div class="text-center mb-3 mb-lg-0">
               <span class="d-block">ひとくち食べるきっかけに</span>
-              <%= link_to root_path, class:"navbar-brand" do %>
+              <%= link_to user_recipes_path, class:"navbar-brand" do %>
                 <%= image_tag 'logo.png', size: '120x120' %>
               <% end %>
             </div>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,84 +29,58 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
               <ul class="navbar-nav ml-auto">
+                <li class="nav-item ml-auto mr-2">
+                  <%= render 'layouts/search', searches: @searches %>
+                </li>
                 <% if admin_signed_in? %>
                   <li class="nav-item ml-auto">
-                    <%= link_to "レシピ一覧", admin_recipes_path, class: 'btn btn-outline-secondary btn-sm' %>
+                    <%= link_to "レシピ一覧", admin_recipes_path, class: 'btn btn-sm' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "ユーザー一覧", admin_members_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "ユーザー一覧", admin_members_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "コメント一覧", admin_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "コメント一覧", admin_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "ジャンル一覧", admin_genres_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "ジャンル一覧", admin_genres_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
 
                 <% elsif user_signed_in? %>
                   <li class="nav-item ml-auto">
-                    <%= link_to "マイページ", user_path, class: 'btn btn-outline-secondary btn-sm' %>
+                    <%= link_to "マイページ", root_path, class: 'btn btn-sm' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "My レシピ", user_user_index_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "My レシピ", user_user_index_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "レシピ一覧", user_recipes_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "レシピ一覧", user_recipes_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
 
                 <% else %>
                   <li class="nav-item ml-auto">
-                    <%= link_to "トップページ", root_path, class: 'btn btn-outline-secondary btn-sm' %>
+                    <%= link_to "トップページ", root_path, class: 'btn btn-sm' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "レシピ", user_recipes_path, class: 'btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "レシピ", user_recipes_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0" %>
+                    <%= link_to "新規登録", new_user_registration_path, class: "btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0" %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0" %>
+                    <%= link_to "ログイン", new_user_session_path, class: "btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0" %>
                   </li>
                 <% end %>
               </ul>
             </div>
 
-<h2>Results index</h2>
 
-<table class="table table-hover table-inverse">
-  <!--検索対象モデルがUserの時 -->
-  <% if @range == "Racipe" %>
-    <tbody>
-      <% @racipes.each do |racipe| %>
-        <tr>
-          <td><%= racipe.name %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  <% else %>
-    <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
-    <tbody>
-      <% @recipe_ingredients.each do |recipe_ingredient| %>
-        <tr>
-          <td><%= racipe.ingredient %></td>
-          <td><%= racipe.ingredient_amount %></td>
-        </tr>
-        </tr>
-      <% end %>
-    </tbody>
-  <% end %>
-</table>
-            <!--< %= form_tag({controller:"recipes",action:"index"}, method: :get) do %>-->
-            <!--< %= text_field_tag :search %>-->
-            <!--< %= submit_tag '検索する' %>-->
-
-            <!--< % end %>-->
 
 
           </div>
