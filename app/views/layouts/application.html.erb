@@ -32,7 +32,11 @@
                 <li class="nav-item ml-auto mr-2">
                   <%= render 'layouts/search', searches: @searches %>
                 </li>
+
                 <% if admin_signed_in? %>
+                <li class="nav-item ml-auto mr-2">
+                  <% admin.name %>さん
+                </li>
                   <li class="nav-item ml-auto">
                     <%= link_to "レシピ一覧", admin_recipes_path, class: 'btn btn-sm' %>
                   </li>
@@ -50,14 +54,12 @@
                   </li>
 
                 <% elsif user_signed_in? %>
+                </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "マイページ", root_path, class: 'btn btn-sm' %>
+                    <%= link_to current_user.user_name, user_member_path(current_user), class: 'btn btn-sm' %>
                   </li>
                   <li class="nav-item ml-auto">
-                    <%= link_to "My レシピ", user_user_index_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
-                  </li>
-                  <li class="nav-item ml-auto">
-                    <%= link_to "レシピ一覧", user_recipes_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
+                    <%= link_to "レシピ一覧", user_user_index_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
                   </li>
                   <li class="nav-item ml-auto">
                     <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>
@@ -65,7 +67,7 @@
 
                 <% else %>
                   <li class="nav-item ml-auto">
-                    <%= link_to "トップページ", root_path, class: 'btn btn-sm' %>
+                    <%= link_to "Hoicookとは", root_path, class: 'btn btn-sm' %>
                   </li>
                   <li class="nav-item ml-auto">
                     <%= link_to "レシピ", user_recipes_path, class: 'btn btn-sm ml-0 ml-lg-2 mt-2 mt-lg-0' %>

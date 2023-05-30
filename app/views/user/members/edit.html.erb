@@ -1,19 +1,19 @@
-<div class="continer">
+<div class="container">
   <div class="row">
-    <div class="col-xs-12">
-    <h3><strong>登録情報編集</strong></h3>
-    <%= form_with(model:@user, url:user_users_path ,method: :patch) do |f| %>
+    <div class="col-md-8 col-xl-8 mx-auto">
+    <h3>登録情報の編集</h3>
+    <%= form_with(model:@user, url:user_member_path ,method: :patch) do |f| %>
 
       <div>
 
         <div class="col-xs-12">
-          <%= f.label :"ユーザーネーム", class: "col-sm-3 control-label", style: "margin: 10px;" %>
+          <%= f.label :"氏名", class: "col-sm-3 control-label", style: "margin: 10px;" %>
           <%= f.text_field :last_name, class: "last_name col-sm-3 form-control-static name", style: "margin: 10px;" %>
           <%= f.text_field :first_name, class: "first_name col-sm-3 form-control-static name", style: "margin: 10px;" %>
         </div>
 
         <div class="col-xs-12">
-          <%= f.label :"氏名", class: "col-sm-3 control-label", style: "margin: 10px;" %>
+          <%= f.label :"ユーザーネーム", class: "col-sm-3 control-label", style: "margin: 10px;" %>
           <%= f.text_field :user_name, class: "last_name col-sm-3 form-control-static name", style: "margin: 10px;" %>
         </div>
         <div class="col-xs-12">

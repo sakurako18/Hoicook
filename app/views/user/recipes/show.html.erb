@@ -1,8 +1,15 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12 col-xl-12">
-      <h3></h3><br>
+  <% if @recipe.user == current_user %>
+    <div class="row">
+      <div class="col-md-auto ml-auto">
+        <%= link_to "編集する", edit_user_recipe_path(@recipe), class:"btn btn-success btn-block" %>
+      </div>
+      <div class="col-md-auto lg-2">
+        <%= link_to "レシピの削除", user_recipe_path(@recipe), method: :delete, class: "btn btn-danger btn-block" %>
+      </div>
     </div>
+  <% end %>
+
 
 <div class="container">
   <div class="row">
@@ -47,12 +54,14 @@
             <td><%= @recipe.genre.name %></td>
           </tr>
           <tr>
-            <td>投稿ステータス</td>
-            <td>
-            <% if @recipe.post_status == true %>
-              公開中
-            <% else %>
-              非公開中
+            <% if @recipe.user == current_user %>
+              <td>投稿ステータス</td>
+              <td>
+              <% if @recipe.post_status == true %>
+                公開中
+              <% else %>
+                非公開中
+              <% end %>
             <% end %>
 
             </td>
@@ -60,9 +69,7 @@
         </tbody>
       </table>
 
-      <div class="col-md-offset-1">
-        <%= link_to "編集する" , edit_user_recipe_path(@recipe), class:"btn btn-lg btn-success" %>
-      </div>
+
 
 
 <div>
@@ -71,16 +78,25 @@
   <% if @recipe.favorited_by?(current_user) %>
     <p>
       <%= link_to user_recipe_favorites_path(@recipe), method: :delete do %>
-        ♥<%= @recipe.favorites.count %>
+        <i class="fas fa-bookmark"></i>
+        <%= @recipe.favorites.count %>
       <% end %>
     </p>
     <% else %>
     <p>
       <%= link_to user_recipe_favorites_path(@recipe), method: :post do %>
-        ♡<%= @recipe.favorites.count %>
+        <i class="far fa-bookmark"></i>
+        <%= @recipe.favorites.count %>
       <% end %>
     </p>
   <% end %>
+
+<div>
+  <%= form_with model: [@recipe, @comment], url: user_recipe_comments_path(@recipe.id) do |f| %>
+    <%= f.text_area :comment, rows: 5, placeholder: "コメントをここに", class: 'form-control' %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
 
   <% @recipe.comments.each do |comment| %>
     <p><%#= image_tag comment.user.get_profile_image(100,100) %></p>
@@ -88,14 +104,6 @@
     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
   <% end %>
 </div>
-<div>
-  <%= form_with model: [@recipe, @comment], url: user_recipe_comments_path(@recipe.id) do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-</div>
-
-
     </div>
   </div>
 </div>
