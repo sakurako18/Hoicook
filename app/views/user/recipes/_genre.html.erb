@@ -1,17 +1,18 @@
-  <h2>ジャンル一覧</h2>
-      <%= image_tag user.get_profile_image, size: '100x100' %>
-      <table class="table">
-      <tbody>
-        <tr>
-          <th>name</th>
-          <th><%= user.name %></th>
-          </tr>
-          <tr>
-          <th>introduction</th>
-          <th><%= user.introduction %></th>
-        </tr>
-      </tbody>
-      </table>
-        <%= link_to edit_user_path(user.id), class:'btn btn-outline-secondary btn-block' do %>
-        <i class="fas fa-user-cog"></i>
-        <% end %>
+  <h5>月齢</h5>
+
+  <h5>ジャンル検索</h5>
+
+  <%= form_tag({controller:"recipes",action:"index"}, method: :get) do %>
+    <% Tag.all.each do |t| %>
+        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+    <% end %>
+    <%= submit_tag '検索' %>
+<% end %>
+
+<!--< % recipes.each do |recipe| %>-->
+
+<!--< %= recipes.name %>-->
+
+<!--< % end %>-->
+
+

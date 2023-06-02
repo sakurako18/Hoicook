@@ -54,6 +54,15 @@
             <td><%= @recipe.genre.name %></td>
           </tr>
           <tr>
+            <td>タグ</td>
+            <td>
+              <!--< % @recipes.tags.each do |tag| %>-->
+              <!--    <span><%= tag.name %></span>-->
+              <!--< % end %>-->
+            </td>
+          </tr>
+
+          <tr>
             <% if @recipe.user == current_user %>
               <td>投稿ステータス</td>
               <td>

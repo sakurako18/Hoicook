@@ -2,13 +2,25 @@ class User::RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.where(post_status: true).page(params[:page])
-    #@recipe = Recipe.all
-
+    @genres = Genre.all
+    # if params[:genre_id]
+    #   @genre =Genre.find(params[:genre_id])
+    # @recipe = @genre.racipe.page(params[:page])
+    # end
+    if params[:tag_ids]
+      @recipes = []
+      params[:tag_ids].each do |key, value|
+        if value == "1"
+          tag_tweets = Tag.find_by(name: key).tweets
+          @recipes = @recipes.empty? ? tag_tweets : @recipes & tag_tweets
+        end
+      end
+    end
   end
 
   def user_index
-    @recipes = Recipe.page(params[:page])
-    @genres = Genre.all
+    @recipes = Recipe.where(user_id: current_user).page(params[:page])
+
   end
 
   def new
@@ -60,5 +72,8 @@ class User::RecipesController < ApplicationController
                                   recipe_ingredients_attributes:[:id, :ingredient, :ingredient_amount, :_destroy])
   end
 
+  def article_params
+    params.require(:article).permit(:body, tag_ids: [])
+  end
 
 end
