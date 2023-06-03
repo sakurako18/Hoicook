@@ -18,8 +18,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "/" => "homes#top"
-    resources :recipes, only: [:index, :new, :create, :show, :edit, :update]
-    resources :genres, only: [:index, :create, :edit, :update]
+    resources :recipes, only: [:index, :show, :destroy]
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :members, only: [:index, :show, :edit, :update]
   end
 
@@ -28,17 +28,20 @@ Rails.application.routes.draw do
     get "/about" => "homes#about"
     get "/user_index" => "recipes#user_index"
 
+    resources :recommends, only: [:index, :new, :create, :show, :edit, :update]
+    resources :members, only: [:show, :edit, :update]
     resources :recipes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy, :index]
+      resources :tags, only: [:index, :create, :destroy, :edit]
     end
       resources :comments, only: [:create, :destroy]
     end
 
-    resources :members, only: [:show, :edit, :update]
+
     # get "/users/unsubscribe" => "users#unsubscribe"  #ユーザーの退会確認画面
     # patch "/users/withdraw" => "users#withdraw"        #ユーザーの退会処理
 
-    resources :recommends, only: [:index, :new, :create, :show, :edit, :update]
+
 
   end
 

@@ -2,8 +2,8 @@ class SearchesController < ApplicationController
   before_action :authenticate_user!
 
   def search
+    @genres = Genre.all
     @range = params[:range]
-
     if @range == "Recipe"
       @recipes = Recipe.looks(params[:word])
     else

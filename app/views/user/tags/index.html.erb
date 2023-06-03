@@ -1,0 +1,31 @@
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-xl-8 mx-auto">
+      <h2>タグ一覧・追加</h2>
+
+  <%= form_with model: @tag, url: user_recipe_tags_path, method: :get do |f| %>
+
+    <td><%= f.text_field :tag, class: "mr-3" %></td>
+    <td><%= f.submit 'タグを追加', class: "mr-5" %></td>
+
+  <% end %>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タグ</th>
+              <th> </th>
+            </tr>
+              <% @tags.each do |tag| %>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= tag.name %></td>
+              <td><%= link_to "編集する", eedit_user_recipe_tags_path(tag.id), class: "btn btn-success" %></td>
+           </tr>
+           </tbody>
+              <%end%>
+        </table>
+      </div>
+    </div>
+  </div>

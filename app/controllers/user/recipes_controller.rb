@@ -3,16 +3,15 @@ class User::RecipesController < ApplicationController
   def index
     @recipes = Recipe.where(post_status: true).page(params[:page])
     @genres = Genre.all
-    # if params[:genre_id]
-    #   @genre =Genre.find(params[:genre_id])
-    # @recipe = @genre.racipe.page(params[:page])
-    # end
+    if params[:genre_ids]
+      @recipes = @recipes.where(genre_id: params[:genre_ids])
+    end
+
     if params[:tag_ids]
-      @recipes = []
       params[:tag_ids].each do |key, value|
         if value == "1"
-          tag_tweets = Tag.find_by(name: key).tweets
-          @recipes = @recipes.empty? ? tag_tweets : @recipes & tag_tweets
+          tag_recipes = Tag.find_by(name: key).recipes
+          @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
         end
       end
     end
@@ -36,8 +35,15 @@ class User::RecipesController < ApplicationController
       @recipe.recipe_ingredients = @recipe.recipe_ingredients.filter{|ingredient| ingredient.ingredient.present? && ingredient.ingredient_amount.present? }
       @recipe.user_id = current_user.id
       @genres = Genre.all
+
+      #tag_idの取得
+      tag_ids = params[:recipe][:tag_ids]
+
     if @recipe.valid?
-      @recipe.save
+       @recipe.save
+        tag_ids.each do |tag_id|
+          RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
+        end
       redirect_to user_recipe_path(@recipe.id)
     else
       render :new
@@ -59,21 +65,20 @@ class User::RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     @recipe.update(recipe_params)
+    tag_ids = params[:recipe][:tag_ids]
+      tag_ids.each do |tag_id|
+        RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
+      end
     redirect_to user_recipe_path(@recipe.id)
   end
 
   def destroy
-
   end
 
   private
   def recipe_params
     params.require(:recipe).permit(:image, :name, :introduction, :number_of_people, :how_to_make, :genre_id, :post_status,
                                   recipe_ingredients_attributes:[:id, :ingredient, :ingredient_amount, :_destroy])
-  end
-
-  def article_params
-    params.require(:article).permit(:body, tag_ids: [])
   end
 
 end

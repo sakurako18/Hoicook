@@ -21,6 +21,13 @@ class Admin::GenresController < ApplicationController
     redirect_to admin_genres_path
   end
 
+  def destroy
+    @genre = Genre.find(params[:id])
+    @genre.destroy
+    flash[:alert] = "タグを削除しました。"
+    redirect_to admin_genres_path
+  end
+
 private
 
   def genre_params
