@@ -79,7 +79,7 @@
       <div>
         <p>コメント件数：<%= @recipe.comments.count %></p>
 
-          <% if @recipe.favorited_by?(current_user) %>
+          <% if @recipe.favorited_by?(@user) %>
         <p>
           <%= link_to user_recipe_favorites_path(@recipe), method: :delete do %>
           <i class="fas fa-bookmark"></i>
@@ -96,16 +96,19 @@
           <% end %>
 
       <div>
-        <%= form_with model: [@recipe, @comment], url: user_comments_path(@recipe.id) do |f| %>
-        <%= f.text_area :comment, rows: 5, placeholder: "コメントをここに", class: 'form-control' %>
-        <%= f.submit "送信する" %>
+        <% if user_signed_in? %>
+          <%= form_with model: [@recipe, @comment], url: user_comments_path(@recipe.id) do |f| %>
+            <%= f.text_area :comment, rows: 5, placeholder: "コメントをここに", class: 'form-control' %>
+            <%= f.submit "送信する" %>
+          <% end %>
         <% end %>
       </div>
 
       <% @recipe.comments.each do |comment| %>
-      <p><%#= image_tag comment.user.get_profile_image(100,100) %></p>
-      <%= comment.user.user_name %>
-      <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+        <p><%#= image_tag comment.user.get_profile_image(100,100) %></p>
+        <%= comment.user.user_name %>(ID:<%= comment.user.id %>)<br>
+        <%= comment.created_at.strftime('%Y/%m/%d') %><br>
+        <%= comment.comment %>
       <% end %>
 
       </div>
