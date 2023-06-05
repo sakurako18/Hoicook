@@ -72,6 +72,11 @@
               <% end %>
             </li>
             <li class="nav-item ml-auto">
+              <%= link_to user_favorite_recipes_path, class:'nav-link' do %>
+              <i class="fas fa-bookmark"></i> お気に入り
+              <% end %>
+            </li>
+            <li class="nav-item ml-auto">
               <%= link_to destroy_user_session_path, method: :delete, class:'nav-link' do %>
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>

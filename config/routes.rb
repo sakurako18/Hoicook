@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get "/" => "homes#top"
     get "/about" => "homes#about"
     get "/user_index" => "recipes#user_index"
+    get "/favorite_recipes" => "favorites#favorite_recipes"
 
     resources :recommends, only: [:index, :new, :create, :show, :edit, :update]
     resources :members, only: [:show, :edit, :update]
