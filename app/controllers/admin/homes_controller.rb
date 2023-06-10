@@ -1,6 +1,7 @@
 class Admin::HomesController < ApplicationController
-  def top
 
+  def top
+    @comments = Comment.page(params[:page])
   end
 
 end

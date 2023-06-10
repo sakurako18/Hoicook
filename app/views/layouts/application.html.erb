@@ -29,9 +29,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
               <ul class="navbar-nav ml-auto">
-                <li class="nav-item ml-auto mr-2">
-                  <%= render 'layouts/search', searches: @searches %>
-                </li>
+            <!--<li class="nav-item ml-auto mr-2">-->
+            <!--  <%#= render 'layouts/search', searches: @searches %>-->
+            <!--</li>-->
 
                 <% if admin_signed_in? %>
             <li class="nav-item ml-auto">
@@ -59,8 +59,11 @@
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>
             </li>
-                <% elsif user_signed_in? %>
 
+                <% elsif user_signed_in? %>
+            <li class="nav-item ml-auto mr-2">
+              <%= render 'layouts/search', searches: @searches %>
+            </li>
             <li class="nav-item ml-auto">
               <%= link_to user_member_path(current_user), class:'nav-link' do %>
               <i class="fas fa-user-circle"></i> <%= current_user.user_name %>
@@ -82,6 +85,9 @@
               <% end %>
 
                 <% else %>
+            <li class="nav-item ml-auto mr-2">
+              <%= render 'layouts/search', searches: @searches %>
+            </li>
             <li class="nav-item ml-auto">
               <%= link_to root_path, class:'nav-link' do %>
               <i class="fas fa-question-circle"></i> Hoicookとは

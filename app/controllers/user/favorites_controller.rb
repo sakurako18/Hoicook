@@ -1,10 +1,9 @@
 class User::FavoritesController < ApplicationController
 
   def favorite_recipes
-    @user = User.find(params[:id])
-    posts = @user.favorited_posts
-    @posts = Kaminari.paginate_array(posts).page(params[:page]).per(10)
-    render user_favorite_recipes_path
+    @user = current_user
+    favorite_ids = @user.favorites.pluck(:recipe_id)
+    @recipes = Recipe.where(id: favorite_ids).page(params[:page]).per(10)
   end
 
   def create

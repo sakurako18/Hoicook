@@ -32,11 +32,11 @@ Rails.application.routes.draw do
     resources :recommends, only: [:index, :new, :create, :show, :edit, :update]
     resources :members, only: [:show, :edit, :update]
     resources :recipes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
-      resource :favorites, only: [:create, :destroy, :index]
+      resource :favorites, only: [:create, :destroy]
       resources :tags, only: [:index, :create, :destroy, :edit]
-    end
       resources :comments, only: [:create, :destroy]
     end
+  end
 
 
     # get "/users/unsubscribe" => "users#unsubscribe"  #ユーザーの退会確認画面

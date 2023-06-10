@@ -19,7 +19,6 @@ class User::RecipesController < ApplicationController
 
   def user_index
     @recipes = Recipe.where(user_id: current_user).page(params[:page])
-
   end
 
   def new
@@ -48,17 +47,19 @@ class User::RecipesController < ApplicationController
     else
       render :new
     end
-
   end
 
   def show
     @recipe = Recipe.find(params[:id])
     @user = @recipe.user
-    @comment = Comment.new
+    @comment = Comment.new(recipe_id: @recipe.id)
   end
 
   def edit
     @recipe = Recipe.find(params[:id])
+     unless @recipe.user.id == @recipe.current_user.id
+    redirect_to user_recipe_path
+     end
     @genres = Genre.all
   end
 

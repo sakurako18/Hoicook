@@ -1,8 +1,7 @@
 class User::CommentsController < ApplicationController
 
-
   def create
-    @recipe = Recipe.find_by(params[:recipe_id])
+    @recipe = Recipe.find(params[:recipe_id])
     @comment = current_user.comments.new(comment_params)
     @comment.recipe_id = @recipe.id
     @comment.save
@@ -17,7 +16,7 @@ class User::CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:comment)
+    params.require(:comment).permit(:comment, :recipe_id)
   end
 
 end
