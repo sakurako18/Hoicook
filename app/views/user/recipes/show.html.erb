@@ -1,14 +1,19 @@
   <div class="container">
-  <% if @recipe.user == current_user %>
+    <% if @recipe.user == current_user %>
     <div class="row">
       <div class="col-md-auto ml-auto">
         <%= link_to "編集する", edit_user_recipe_path(@recipe), class:"btn btn-success btn-block" %>
       </div>
       <div class="col-md-auto lg-2">
-      <%= link_to "レシピの削除", user_recipe_path(@recipe), method: :delete, class: "btn btn-danger btn-block" %>
+      <%= link_to "レシピの削除", user_recipe_path(@recipe), method: :delete, "data-confirm" => "一度消すと元には戻せません。本当にこのレシピを削除しますか?", class: "btn btn-danger btn-block" %>
       </div>
+    <% end %>
     </div>
-  <% end %>
+    <% if admin_signed_in? %>
+      <div class="col-md-auto ml-auto">
+      <%= link_to "管理者による削除", user_recipe_path(@recipe), method: :delete, "data-confirm" => "管理者として、このレシピを削除しますか?", class: "btn btn-danger btn-block" %>
+      </div>
+    <% end %>
 
   <div class="container">
     <div class="row">
@@ -108,15 +113,41 @@
             <%= f.text_area :comment, rows: 5, placeholder: "レシピの感想などをここに", class: 'form-control' %>
             <%= f.submit "送信する" %>
           <% end %>
-        <% end %>
       </div>
 
-      <% @recipe.comments.each do |comment| %>
-        <p><%#= image_tag comment.user.get_profile_image(100,100) %></p>
-        <%= comment.user.user_name %>(ID:<%= comment.user.id %>)<br>
-        <%= comment.created_at.strftime('%Y/%m/%d') %><br>
-        <%= comment.comment %>
-      <% end %>
+
+<table class="table">
+  <caption>Comment form</caption>
+  <thead>
+    <tr>
+      <th scope="col">no.</th>
+      <th scope="col">user name（ID）</th>
+      <th scope="col">comment</th>
+      <th scope="col">create</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recipe.comments.order("id DESC").each do |comment| %>
+    <tr>
+      <th scope="row"><%= comment.id %>.</th>
+      <td><%= comment.user.user_name %>(ID:<%= comment.user.id %>)</td>
+      <td><%= comment.comment %></td>
+      <td><%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <td>
+        <% if comment.user == current_user %>
+          <%= link_to "削除", user_recipe_comment_path(@recipe.id,comment.id), method: :delete, "data-confirm" => "コメントを消しますか?", class: "btn btn-danger" %>
+        <% end %>
+
+        <% if admin_signed_in? %>
+          <%= link_to "削除", user_recipe_comment_path(@recipe.id,comment.id), method: :delete, "data-confirm" => "管理者として不適切なコメントを削除しますか?", class: "btn btn-danger" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+        <% end %>
+  </tbody>
+</table>
 
       </div>
     </div>

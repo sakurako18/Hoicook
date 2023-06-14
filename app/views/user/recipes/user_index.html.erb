@@ -22,6 +22,9 @@
       ジャンル
     </div>
     <div class="col d-flex align-items-center">
+      いいね
+    </div>
+    <div class="col d-flex align-items-center">
       投稿ステータス
     </div>
   </div>
@@ -46,6 +49,9 @@
     </div>
     <div class="col d-flex align-items-center">
       <%= recipe.genre.name %>
+    </div>
+    <div class="col d-flex align-items-center">
+      <%= recipe.favorites.count %>
     </div>
     <div class="col d-flex align-items-center">
       <% if recipe.post_status == true %>

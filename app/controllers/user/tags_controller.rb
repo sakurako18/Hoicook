@@ -2,7 +2,6 @@ class User::TagsController < ApplicationController
 
   def index
     @recipes = Resipe.all
-
     #以下を追記
     if params[:tag_ids]
       @recipes = []

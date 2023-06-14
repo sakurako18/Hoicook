@@ -81,10 +81,10 @@
           <%= f.label :status, 'ステータス', class: 'mr-3' %>
 
           <label class="mr-3">
-            <%= f.radio_button :post_status, :true %> 公開中
+            <%= f.radio_button :post_status, true, checked: true %> 公開中
           </label>
           <label>
-            <%= f.radio_button :post_status, :false %> 非公開中
+            <%= f.radio_button :post_status, false %> 非公開中
           </label>
 
         </div>

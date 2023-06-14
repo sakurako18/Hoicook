@@ -55,6 +55,11 @@
               <% end %>
             </li>
             <li class="nav-item ml-auto">
+              <%= link_to admin_tags_path,  class:'nav-link' do %>
+              <i class="fas fa-utensils"></i> タグ
+              <% end %>
+            </li>
+            <li class="nav-item ml-auto">
               <%= link_to destroy_admin_session_path, method: :delete, class:'nav-link' do %>
               <i class="fas fa-sign-out-alt"></i> ログアウト
               <% end %>

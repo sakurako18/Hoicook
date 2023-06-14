@@ -6,7 +6,7 @@ class User::SessionsController < Devise::SessionsController
   def new_guest
     user = User.guest
     sign_in user   # ユーザーをログインさせる
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to user_recipes_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
   # GET /resource/sign_in
@@ -23,6 +23,8 @@ class User::SessionsController < Devise::SessionsController
    def destroy
      # Guestユーザーのメールアドレスが変更になった場合は、以下を編集
      current_user.recipes.destroy_all if current_user.email == "aaa@aaa.com"
+     current_user.favorites.destroy_all if current_user.email == "aaa@aaa.com"
+     current_user.comments.destroy_all if current_user.email == "aaa@aaa.com"
      super
    end
 

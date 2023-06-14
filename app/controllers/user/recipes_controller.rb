@@ -1,5 +1,6 @@
 class User::RecipesController < ApplicationController
 
+
   def index
     @recipes = Recipe.where(post_status: true).page(params[:page])
     @genres = Genre.all
@@ -57,15 +58,12 @@ class User::RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
-     unless @recipe.user.id == @recipe.current_user.id
-    redirect_to user_recipe_path
-     end
     @genres = Genre.all
   end
 
   def update
     @recipe = Recipe.find(params[:id])
-    @recipe.update(recipe_params)
+    @recipe.update!(recipe_params)
     tag_ids = params[:recipe][:tag_ids]
       tag_ids.each do |tag_id|
         RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
@@ -74,6 +72,14 @@ class User::RecipesController < ApplicationController
   end
 
   def destroy
+    @recipe = Recipe.find(params[:id])
+    @user = @recipe.user
+    @recipe.destroy
+    if current_user == @user
+     redirect_to user_user_index_path
+    else
+     redirect_to admin_recipes_path
+    end
   end
 
   private

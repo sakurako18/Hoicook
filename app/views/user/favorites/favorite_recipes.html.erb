@@ -1,7 +1,7 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-9 offset-md-1">
-      <h2>お気に入りレシピの一覧</h2><% @recipes.each do |recipe| %>
+      <h3>お気に入りレシピの一覧</h3><% @recipes.each do |recipe| %>
 
     <div class="col-md-9 offset-md-1">
       <%= link_to user_recipe_path(recipe.id) do %>
@@ -12,8 +12,7 @@
       <% end %>
       <!--, style: "max-width: 100%; height: auto"-->
       <% end %>
-      <div><i class="fas fa-bookmark"></i><%= recipe.favorites.count %></div>
-      <div><%= recipe.name %></div>
+      <div><i class="fas fa-bookmark"></i><%= recipe.favorites.count %>  <%= recipe.name %></div>
       <div><%= recipe.genre.name %></div>
     </div>
 
