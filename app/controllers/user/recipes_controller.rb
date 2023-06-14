@@ -63,7 +63,12 @@ class User::RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    @recipe.update!(recipe_params)
+    unless @recipe.user.id == current_user.id
+      redirect_to root_path
+    return
+    end
+    @recipe.update(recipe_params)
+    @recipe.recipe_tag_relations.destroy_all
     tag_ids = params[:recipe][:tag_ids]
       tag_ids.each do |tag_id|
         RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
@@ -74,6 +79,10 @@ class User::RecipesController < ApplicationController
   def destroy
     @recipe = Recipe.find(params[:id])
     @user = @recipe.user
+      unless current_admin.id
+        redirect_to root_path
+      return
+      end
     @recipe.destroy
     if current_user == @user
      redirect_to user_user_index_path

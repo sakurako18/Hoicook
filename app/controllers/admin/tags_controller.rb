@@ -9,14 +9,14 @@ class Admin::TagsController < ApplicationController
     @tag = Tag.new(tag_params)
     if @tag.valid?
       @tag.save
-      redirect_to root_path
+      redirect_to admin_tags_path
     else
       render :new
     end
   end
 
   def destroy
-
+    @tag = Tag.find(params[:id])
   end
 
  private
