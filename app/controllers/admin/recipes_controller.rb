@@ -7,13 +7,12 @@ class Admin::RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @recipe_ingredients = @recipe.recipe_ingredients.build ##親モデル.子モデル.buildで子モデルのインスタンス作成
-    #@how_to_makes = @recipe.how_to_makes.build
+    @recipe_ingredients = @recipe.recipe_ingredients.build
+    ##親モデル.子モデル.buildで子モデルのインスタンス作成
     @genres = Genre.all
   end
 
   def create
-      #byebug
       @recipe = Recipe.new(recipe_params)
       @recipe.user_id = current_user.id
       @genres = Genre.all
@@ -22,18 +21,16 @@ class Admin::RecipesController < ApplicationController
     redirect_to admin_recipe_path(@recipe.id)
     else
     render :new
-
     end
-  end
-
-  def show
-    @recipe = Recipe.find(params[:id])
-
   end
 
   def edit
     @recipe = Recipe.find(params[:id])
     @genres = Genre.all
+  end
+
+  def show
+    @recipe = Recipe.find(params[:id])
   end
 
   def update
@@ -51,6 +48,5 @@ class Admin::RecipesController < ApplicationController
     params.require(:recipe).permit(:how_to_make, :image, :name, :introduction, :number_of_people, :how_to_make, :genre_id, :post_status,
                                   recipe_ingredients_attributes:[:ingredient, :ingredient_amount, :_destroy])
   end
-
 
 end

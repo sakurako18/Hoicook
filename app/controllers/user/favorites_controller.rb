@@ -1,11 +1,5 @@
 class User::FavoritesController < ApplicationController
 
-  def favorite_recipes
-    @user = current_user
-    favorite_ids = @user.favorites.pluck(:recipe_id)
-    @recipes = Recipe.where(id: favorite_ids).page(params[:page]).per(10)
-  end
-
   def create
     @recipe = Recipe.find(params[:recipe_id])
     favorite = current_user.favorites.new(recipe_id: @recipe.id)
@@ -18,6 +12,12 @@ class User::FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(recipe_id: @recipe.id)
     favorite.destroy!
     redirect_to user_recipe_path(@recipe)
+  end
+
+  def favorite_recipes
+    @user = current_user
+    favorite_ids = @user.favorites.pluck(:recipe_id)
+    @recipes = Recipe.where(id: favorite_ids).page(params[:page]).per(10)
   end
 
 end

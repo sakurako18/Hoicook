@@ -20,8 +20,8 @@ Rails.application.routes.draw do
     get "/" => "homes#top"
     resources :recipes, only: [:index]
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
-    resources :tags, only: [:index, :create, :edit, :update, :destroy]
-    resources :members, only: [:index, :show, :edit, :update]
+    resources :tags, only: [:index, :create, :destroy]
+    resources :members, only: [:index, :edit, :show, :update,]
   end
 
   namespace :user do
@@ -38,10 +38,6 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy]
     end
   end
-
-
-    # get "/users/unsubscribe" => "users#unsubscribe"  #ユーザーの退会確認画面
-    # patch "/users/withdraw" => "users#withdraw"        #ユーザーの退会処理
 
 
 

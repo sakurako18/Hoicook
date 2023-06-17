@@ -1,67 +1,66 @@
   <div class="container">
-    <h3>レシピ一覧</h3>
     <div class="row">
+      <h3>レシピ一覧</h3>(全<%= @recipes.count %>件)
       <div class="col-md-12 col-xl-12">
 
-
-      <div class="text-right">
+        <div class="text-right">
           <%= link_to "新規登録", new_user_recipe_path, class:"btn btn-lg btn-success" %>
-      </div>
+        </div>
 
-  <div class="row">
-    <div class="col d-flex align-items-center">
-      レシピID
-    </div>
-    <div class="col d-flex align-items-center">
-      画像
-    </div>
-    <div class="col d-flex align-items-center">
-      レシピ名
-    </div>
-    <div class="col d-flex align-items-center">
-      ジャンル
-    </div>
-    <div class="col d-flex align-items-center">
-      いいね
-    </div>
-    <div class="col d-flex align-items-center">
-      投稿ステータス
-    </div>
-  </div>
+        <div class="row">
+          <div class="col d-flex align-items-center">
+            レシピID
+          </div>
+          <div class="col d-flex align-items-center">
+            画像
+          </div>
+          <div class="col d-flex align-items-center">
+            レシピ名
+          </div>
+          <div class="col d-flex align-items-center">
+            ジャンル
+          </div>
+          <div class="col d-flex align-items-center">
+            いいね
+          </div>
+          <div class="col d-flex align-items-center">
+            投稿ステータス
+          </div>
+        </div>
 
-  <% @recipes.order("id DESC").each do |recipe| %>
+      <% @recipes.order("id DESC").each do |recipe| %>
 
-  <div class="row">
-    <div class="col d-flex align-items-center">
-      <%= recipe.id %>
-    </div>
-    <div class="col d-flex align-items-center">
-      <% if recipe.image.attached? %>
-        <%= image_tag recipe.image, size: '100x100' %>
-      <% else %>
-        <%= image_tag 'no_image.png', size: '100x100' %>
+        <div class="row">
+          <div class="col d-flex align-items-center">
+            <%= recipe.id %>
+          </div>
+          <div class="col d-flex align-items-center">
+            <% if recipe.image.attached? %>
+              <%= image_tag recipe.image, size: '100x100' %>
+            <% else %>
+              <%= image_tag 'no_image.png', size: '100x100' %>
+            <% end %>
+          </div>
+          <div class="col d-flex align-items-center">
+            <%= link_to user_recipe_path(recipe), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" do %>
+              <%= recipe.name %>
+            <% end %>
+          </div>
+          <div class="col d-flex align-items-center">
+            <%= recipe.genre.name %>
+          </div>
+          <div class="col d-flex align-items-center">
+            <%= recipe.favorites.count %>
+          </div>
+          <div class="col d-flex align-items-center">
+            <% if recipe.post_status == true %>
+              公開中
+            <% else %>
+              非公開中
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    </div>
-    <div class="col d-flex align-items-center">
-      <%= link_to user_recipe_path(recipe), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" do %>
-      <%= recipe.name %>
-      <% end %>
-    </div>
-    <div class="col d-flex align-items-center">
-      <%= recipe.genre.name %>
-    </div>
-    <div class="col d-flex align-items-center">
-      <%= recipe.favorites.count %>
-    </div>
-    <div class="col d-flex align-items-center">
-      <% if recipe.post_status == true %>
-        公開中
-      <% else %>
-        非公開中
-      <% end %>
-    </div>
-  </div>
-  <% end %>
 
-<%= paginate @recipes, style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %>
+  <%= paginate @recipes, style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %>
 

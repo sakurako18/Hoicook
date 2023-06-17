@@ -11,8 +11,6 @@ class SearchesController < ApplicationController
       @recipes = @recipe_ingredients.map {|ingredient| ingredient.recipe}
     end
 
-    # @recipes
-
     render "user/recipes/index"
   end
 end

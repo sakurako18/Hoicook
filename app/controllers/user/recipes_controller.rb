@@ -25,7 +25,6 @@ class User::RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @recipe_ingredients = @recipe.recipe_ingredients.build ##親モデル.子モデル.buildで子モデルのインスタンス作成
-    #@how_to_makes = @recipe.how_to_makes.build
     @genres = Genre.all
   end
 
@@ -35,7 +34,6 @@ class User::RecipesController < ApplicationController
       @recipe.recipe_ingredients = @recipe.recipe_ingredients.filter{|ingredient| ingredient.ingredient.present? && ingredient.ingredient_amount.present? }
       @recipe.user_id = current_user.id
       @genres = Genre.all
-
       #tag_idの取得
       tag_ids = params[:recipe][:tag_ids]
 

@@ -1,14 +1,19 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-xl-8 mx-auto">
+      <%= flash[:alert] %>
       <h2>タグ一覧・追加</h2>
 
-  <%= form_with model: @tag, url: admin_tags_path, method: :post do |f| %>
-
-<%#= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
-    <td><%= f.text_field :name, class: "mr-3" %></td>
-    <td><%= f.submit 'タグを追加', class: "mr-5" %></td>
-  <% end %>
+      <%= form_with model: @tag, url: admin_tags_path, method: :post do |f| %>
+         <table class="table">
+          <thead>
+            <tr>
+              <td><%= f.text_field :name, class: "mr-3" %></td>
+              <td><%= f.submit 'タグを追加', class: "mr-5" %></td>
+            </tr>
+          </thead>
+        </table>
+      <% end %>
 
         <table class="table">
           <thead>
@@ -16,15 +21,17 @@
               <th>タグ</th>
               <th> </th>
             </tr>
-              <% @tags.each do |tag| %>
           </thead>
+            <% @tags.each do |tag| %>
           <tbody>
             <tr>
               <td><%= tag.name %></td>
-              <td></td>
+              <td>
+                <%= link_to "削除",admin_tag_path(tag.id), method: :delete, class: "btn btn-danger" %>
+              </td>
            </tr>
            </tbody>
-              <%end%>
+            <%end%>
         </table>
       </div>
     </div>

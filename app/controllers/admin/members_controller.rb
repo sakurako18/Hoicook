@@ -5,19 +5,19 @@ class Admin::MembersController < ApplicationController
     @user = User.page(params[:page])
   end
 
-  def show
+  def edit
+    @users = User.all
     @user = User.find(params[:id])
   end
 
-  def edit
-    @users = User.all
+  def show
     @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_to admin_user_path(@user.id)
+    redirect_to admin_member_path(@user.id)
   end
 
 
@@ -25,6 +25,5 @@ private
   def user_params
       params.require(:user).permit(:last_name, :first_name, :user_name, :email, :is_deleted)
   end
-
 
 end

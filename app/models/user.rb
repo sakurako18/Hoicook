@@ -8,6 +8,10 @@ class User < ApplicationRecord
     has_many :comments, dependent: :destroy
     has_many :favorites, dependent: :destroy
 
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+
   def self.guest
     find_or_create_by!(email: 'aaa@aaa.com') do |user|
       user.password = SecureRandom.urlsafe_base64

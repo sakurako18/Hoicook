@@ -3,16 +3,14 @@
     <head>
       <title>Hoicook</title>
       <meta name="viewport" content="width=device-width,initial-scale=1">
-      <%= csrf_meta_tags %>
-      <%= csp_meta_tag %>
-
-      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
 
     <body class="d-flex flex-column vh-100">
       <header class="shadow-sm">
-
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container">
             <div class="text-center mb-3 mb-lg-0">
@@ -29,90 +27,85 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
               <ul class="navbar-nav ml-auto">
-            <!--<li class="nav-item ml-auto mr-2">-->
-            <!--  <%#= render 'layouts/search', searches: @searches %>-->
-            <!--</li>-->
-
                 <% if admin_signed_in? %>
-            <li class="nav-item ml-auto">
-              <%= link_to admin_recipes_path, class:'nav-link' do %>
-              <i class="fas fa-book-open"></i> レシピ
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to admin_members_path, class:'nav-link' do %>
-              <i class="fas fa-users"></i> ユーザー
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to admin_path, class:'nav-link' do %>
-              <i class="fas fa-comments"></i> コメント
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to admin_genres_path,  class:'nav-link' do %>
-              <i class="fas fa-utensils"></i> ジャンル
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to admin_tags_path,  class:'nav-link' do %>
-              <i class="fas fa-tag"></i> タグ
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to destroy_admin_session_path, method: :delete, class:'nav-link' do %>
-              <i class="fas fa-sign-out-alt"></i> ログアウト
-              <% end %>
-            </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to admin_recipes_path, class:'nav-link' do %>
+                  <i class="fas fa-book-open"></i> レシピ
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to admin_members_path, class:'nav-link' do %>
+                  <i class="fas fa-users"></i> ユーザー
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to admin_path, class:'nav-link' do %>
+                  <i class="fas fa-comments"></i> コメント
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to admin_genres_path,  class:'nav-link' do %>
+                  <i class="fas fa-utensils"></i> ジャンル
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to admin_tags_path,  class:'nav-link' do %>
+                  <i class="fas fa-tag"></i> タグ
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to destroy_admin_session_path, method: :delete, class:'nav-link' do %>
+                  <i class="fas fa-sign-out-alt"></i> ログアウト
+                  <% end %>
+                </li>
 
                 <% elsif user_signed_in? %>
-            <li class="nav-item ml-auto mr-2">
-              <%= render 'layouts/search', searches: @searches %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to user_member_path(current_user), class:'nav-link' do %>
-              <i class="fas fa-user-circle"></i> <%= current_user.user_name %>
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to user_user_index_path, class:'nav-link' do %>
-              <i class="fas fa-book-open"></i> My レシピ
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to user_favorite_recipes_path, class:'nav-link' do %>
-              <i class="fas fa-bookmark"></i> お気に入り
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to destroy_user_session_path, method: :delete, class:'nav-link' do %>
-              <i class="fas fa-sign-out-alt"></i> ログアウト
-              <% end %>
+                <li class="nav-item ml-auto mr-2">
+                  <%= render 'layouts/search', searches: @searches %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to user_member_path(current_user), class:'nav-link' do %>
+                  <i class="fas fa-user-circle"></i> <%= current_user.user_name %>
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to user_user_index_path, class:'nav-link' do %>
+                  <i class="fas fa-book-open"></i> My レシピ
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to user_favorite_recipes_path, class:'nav-link' do %>
+                  <i class="fas fa-bookmark"></i> お気に入り
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to destroy_user_session_path, method: :delete, class:'nav-link' do %>
+                  <i class="fas fa-sign-out-alt"></i> ログアウト
+                  <% end %>
 
                 <% else %>
-            <li class="nav-item ml-auto mr-2">
-              <%= render 'layouts/search', searches: @searches %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to root_path, class:'nav-link' do %>
-              <i class="fas fa-question-circle"></i> Hoicookとは
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to user_recipes_path, class:'nav-link' do %>
-              <i class="fas fa-book-open"></i> レシピ
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to new_user_registration_path, class:'nav-link' do %>
-              <i class="fas fa-user-plus"></i> 新規登録
-              <% end %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to new_user_session_path,  class:'nav-link' do %>
-              <i class="fas fa-sign-in-alt"></i> ログイン
-              <% end %>
-
+                <li class="nav-item ml-auto mr-2">
+                  <%= render 'layouts/search', searches: @searches %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to root_path, class:'nav-link' do %>
+                  <i class="fas fa-question-circle"></i> Hoicookとは
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to user_recipes_path, class:'nav-link' do %>
+                  <i class="fas fa-book-open"></i> レシピ
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to new_user_registration_path, class:'nav-link' do %>
+                  <i class="fas fa-user-plus"></i> 新規登録
+                  <% end %>
+                </li>
+                <li class="nav-item ml-auto">
+                  <%= link_to new_user_session_path,  class:'nav-link' do %>
+                  <i class="fas fa-sign-in-alt"></i> ログイン
+                  <% end %>
                 <% end %>
               </ul>
             </div>

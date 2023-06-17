@@ -1,16 +1,14 @@
-<div class="container">
-  <div class="row">
-    <h3>マイページ</h3>
-
-    <div class="col-md-auto ml-auto">
-      <%= link_to "編集する", edit_user_member_path(@users), class: "col-xs-12 btn btn-success"%>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-xl-8 mx-auto">
+        <h3>マイページ</h3>
+      </div>
     </div>
-  </div>
-</div>
+
     <div class="col-md-8 col-xl-8 mx-auto">
       <div class="table-responsive">
         <table class= "table-borderess">
-          <tbody>
+          <thead>
             <tr>
               <td>ユーザーネーム</td>
               <td><%= @users.user_name %></td>
@@ -24,10 +22,11 @@
               </td>
               <td><%= @users.email %></td>
             </tr>
-          <tbody>
+          </thead>
         </table>
+        <div class="col-md-auto ml-auto">
+          <%= link_to "編集する", edit_user_member_path(@users), class: "col-xs-12 btn btn-success"%>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>

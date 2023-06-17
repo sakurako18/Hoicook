@@ -9,6 +9,7 @@ class Admin::TagsController < ApplicationController
     @tag = Tag.new(tag_params)
     if @tag.valid?
       @tag.save
+      flash[:alert] = "新しいタグを追加しました。"
       redirect_to admin_tags_path
     else
       render :new
@@ -17,6 +18,9 @@ class Admin::TagsController < ApplicationController
 
   def destroy
     @tag = Tag.find(params[:id])
+    @tag.destroy
+    flash[:alert] = "タグを削除しました。"
+    redirect_to admin_tags_path
   end
 
  private
