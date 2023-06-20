@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :configure_permitted_parameters, only: [:create]
 
   def new_guest
     user = User.guest
@@ -27,6 +27,14 @@ class User::SessionsController < Devise::SessionsController
      current_user.comments.destroy_all if current_user.email == "aaa@aaa.com"
      super
    end
+
+  def after_sign_in_path_for(resource)
+    user_recipes_path
+  end
+
+  def after_sign_out_path_for(resource)
+    new_user_session_path
+  end
 
   # protected
 

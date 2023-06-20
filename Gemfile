@@ -58,6 +58,10 @@ end
   gem 'kaminari','~> 1.2.1'
   gem 'cocoon'
 
+  # 日本語化(Rails 6の場合)
+  gem 'rails-i18n', '~> 6.0'
+  gem 'devise-i18n'
+
   gem 'dotenv-rails'
   group :production do
     gem 'mysql2'

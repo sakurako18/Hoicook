@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-xl-8 mx-auto">
-
-    <h2>ユーザーログイン</h2>
+  <p><font color=”#008000”><%= flash[:notice] %></font></p>
+  <h2>ユーザーログイン</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">

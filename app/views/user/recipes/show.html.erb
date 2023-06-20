@@ -100,7 +100,7 @@
           </tbody>
         </table>
 
-        <% if user_signed_in? || admin_signed_in? %>
+      <% if user_signed_in? %>
       <div>
         <p>コメント</p>
         <%= form_with model: @comment, url: user_recipe_comments_path(@recipe) do |f| %>
@@ -108,23 +108,23 @@
           <%= f.submit "送信する" %>
         <% end %>
       </div>
+      <% end %>
 
+        <% if user_signed_in? || admin_signed_in? %>
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">no.</th>
-                <th scope="col">user name（ID）</th>
-                <th scope="col">comment</th>
-                <th scope="col">create</th>
+                <th scope="col">コメント</th>
+                <th scope="col">投稿者</th>
+                <th scope="col">投稿日時</th>
                 <th scope="col"></th>
               </tr>
               </thead>
             <tbody>
               <% @recipe.comments.order("id DESC").each do |comment| %>
                 <tr>
-                  <th scope="row"><%= comment.id %>.</th>
-                  <td><%= comment.user.user_name %>(ID:<%= comment.user.id %>)</td>
                   <td><%= comment.comment %></td>
+                  <td><%= comment.user.user_name %>(ID:<%= comment.user.id %>)</td>
                   <td><%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
                   <td>
                     <% if comment.user == current_user %>

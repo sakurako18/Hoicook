@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class User::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+    before_action :configure_permitted_parameters, only: [:create]
+   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
    def new
@@ -13,6 +13,14 @@ class User::RegistrationsController < Devise::RegistrationsController
    def create
      super
    end
+
+  def after_sign_in_path_for(resource)
+    user_recipes_path
+  end
+
+  def after_sign_out_path_for(resource)
+    new_user_session_path
+  end
 
   # GET /resource/edit
   # def edit

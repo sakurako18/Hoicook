@@ -1,27 +1,26 @@
-<div class="container px-5 px-sm-0">
-  <div class="row">
-    <div class="col-md-9 offset-md-1">
-    <h3>お気に入りレシピの一覧</h3>(全<%= @recipes.count %>件)
-
-    <% @recipes.each do |recipe| %>
-
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <h3>お気に入りレシピの一覧</h3>(全<%= @recipes.count %>件)
       <div class="col-md-9 offset-md-1">
-        <%= link_to user_recipe_path(recipe.id) do %>
-          <% if recipe.image.attached? %>
-            <%= image_tag recipe.image, class: 'img-fluid', style: 'width: 100%; height: 200px; object-fit: cover;' %>
-          <% else %>
-            <%= image_tag 'no_image.png', class: 'img-fluid', style: 'width: 100%; height: 200px; object-fit: cover;' %>
+
+      <% @recipes.each do |recipe| %>
+
+        <div class="col-md-9 offset-md-1">
+          <%= link_to user_recipe_path(recipe.id) do %>
+            <% if recipe.image.attached? %>
+              <%= image_tag recipe.image, class: 'img-fluid', style: 'width: 100%; height: 200px; object-fit: cover;' %>
+            <% else %>
+              <%= image_tag 'no_image.png', class: 'img-fluid', style: 'width: 100%; height: 200px; object-fit: cover;' %>
+            <% end %>
           <% end %>
-        <% end %>
-        <div>
-          <i class="fas fa-bookmark"></i><%= recipe.favorites.count %>  <%= recipe.name %>
+          <div>
+            <i class="fas fa-bookmark"></i><%= recipe.favorites.count %>  <%= recipe.name %>
+          </div>
+          <div><%= recipe.genre.name %></div>
         </div>
-        <div><%= recipe.genre.name %></div>
+
+      <% end %>
       </div>
-
-    <% end %>
-
     </div>
   </div>
-</div>
-
+  </div>

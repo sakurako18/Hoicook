@@ -18,6 +18,10 @@ before_action :authenticate_user!
         render 'edit'
     end
   end
+  
+  def destroy
+
+  end
 
 
 private
