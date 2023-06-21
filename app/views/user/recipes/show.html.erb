@@ -15,6 +15,8 @@
       </div>
         <% end %>
 
+<p><font color=”#800000”><%= flash[:warning] %></font></p>
+
       <div class="container">
     <div class="row">
       <div class="col-md-3">
@@ -110,7 +112,7 @@
       </div>
       <% end %>
 
-        <% if user_signed_in? || admin_signed_in? %>
+        <!--<%# if user_signed_in? || admin_signed_in? %>-->
           <table class="table">
             <thead>
               <tr>
@@ -139,7 +141,7 @@
               <% end %>
             </tbody>
           </table>
-        <% end %>
+        <%# end %>
       </div>
     </div>
   </div>

@@ -5,17 +5,24 @@ class User::RecipesController < ApplicationController
     @recipes = Recipe.where(post_status: true).page(params[:page])
     @genres = Genre.all
     if params[:genre_ids]
-      @recipes = @recipes.where(genre_id: params[:genre_ids])
+      @recipes = @recipes.where(genre_id: params[:genre_ids]).page(params[:page])
     end
 
     if params[:tag_ids]
+      recipes = []
       params[:tag_ids].each do |key, value|
         if value == "1"
-          tag_recipes = Tag.find_by(name: key).recipes
-          @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
+          Tag.find_by(name: key).recipes.each do |recipe|
+            recipes.push(recipe)
+          end
+
+         # @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
         end
       end
+       @recipes = Kaminari.paginate_array(recipes).page(params[:page]).per(10)
     end
+
+
   end
 
   def user_index
@@ -42,6 +49,7 @@ class User::RecipesController < ApplicationController
         tag_ids.each do |tag_id|
           RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
         end
+        flash[:notice] = "新しくレシピを投稿しました"
       redirect_to user_recipe_path(@recipe.id)
     else
       render :new
@@ -61,31 +69,33 @@ class User::RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    unless @recipe.user.id == current_user.id
-      redirect_to root_path
-    return
-    end
+    # unless @recipe.user.id == current_user.id
+    #   redirect_to root_path
+    # return
+    # end
     @recipe.update(recipe_params)
     @recipe.recipe_tag_relations.destroy_all
     tag_ids = params[:recipe][:tag_ids]
       tag_ids.each do |tag_id|
         RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
       end
+      flash[:notice] = "レシピを更新しました"
     redirect_to user_recipe_path(@recipe.id)
   end
 
   def destroy
     @recipe = Recipe.find(params[:id])
     @user = @recipe.user
-      unless current_admin.id
-        redirect_to root_path
-      return
-      end
+      # unless current_admin.id
+      #   redirect_to root_path
+      # return
+      # end
     @recipe.destroy
+    flash[:notice] = "レシピを削除しました"
     if current_user == @user
      redirect_to user_user_index_path
     else
-     redirect_to admin_recipes_path
+     redirect_to user_recipes_path
     end
   end
 

@@ -14,7 +14,8 @@ class Recipe < ApplicationRecord
   validates :introduction, presence: true
   validates :number_of_people, presence: true
   validates :how_to_make, presence: true
-  # validates :post_status, presence: true
+  validates :post_status, presence: true
+  validates :genre_id, presence: true
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

@@ -5,8 +5,8 @@
       </div>
 
       <div class="col-md-9 offset-md-1">
-      <%= flash[:notice] %>
-      <h3>レシピ一覧</h3>(全<%= @recipes.count %>件)
+        <p><font color=”#008000”><%= flash[:notice] %></font></p>
+        <h3>レシピ一覧</h3>(全<%= @recipes.count %>件)
 
         <div class="row">
           <% @recipes.each do |recipe| %>

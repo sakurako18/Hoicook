@@ -18,7 +18,7 @@ class User::MembersController < ApplicationController
         render 'edit'
     end
   end
-  
+
   def destroy
 
   end
