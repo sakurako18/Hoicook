@@ -4,7 +4,7 @@
   <% if @recipe.user == current_user %>
     <div class="row">
       <div class="col-6 col-md-3 ml-auto">
-        <%= link_to "レシピの削除", user_recipe_path(@recipe), method: :delete, class: "btn btn-danger btn-block" %>
+        <p class="text-danger ">* は入力必須項目です</p>
       </div>
     </div>
   <% end %>

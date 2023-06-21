@@ -1,9 +1,7 @@
   <%= form_with model: recipe, url: path,method: action do |f| %>
 
     <div class="form-group">
-      <div>
-        <%= f.label :image, "* は入力必須となります" %>
-      </div>
+      <%= f.label :introduction, 'レシピ画像' %>
       <%= f.file_field :image, accept: "image/*", class: 'mr-3' %>
     </div>
 

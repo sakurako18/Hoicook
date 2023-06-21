@@ -13,6 +13,7 @@
           <th>ジャンル</th>
           <th>いいね件数</th>
           <th>コメント件数</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +26,7 @@
             <td><%= recipe.genre.name %></td>
             <td><%= recipe.favorites.count %></td>
             <td><%= recipe.comments.count %></td>
-            </td>
+            <td></td>
           </tr>
         <% end %>
       </tbody>
