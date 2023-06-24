@@ -7,8 +7,8 @@ class SearchesController < ApplicationController
     if @range == "Recipe"
       @recipes = Recipe.looks(params[:word]).page(params[:page])
     else
-      @recipe_ingredients = RecipeIngredient.looks(params[:word]).page(params[:page])
-      @recipes = @recipe_ingredients.map {|ingredient| ingredient.recipe}
+      @recipe_ingredients = RecipeIngredient.looks(params[:word])
+      @recipes = Kaminari.paginate_array(@recipe_ingredients.map {|ingredient| ingredient.recipe}).page(params[:page])
     end
     render "user/recipes/index"
   end

@@ -40,7 +40,7 @@ class Admin::RecipesController < ApplicationController
   end
 
   def destroy
-
+    @recipe = Recipe.find(params[:id])
   end
 
   private

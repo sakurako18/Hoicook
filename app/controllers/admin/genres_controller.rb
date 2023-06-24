@@ -1,4 +1,5 @@
 class Admin::GenresController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :create, :edit, :update, :destroy], unless: :devise_controller?
 
   def index
     @genre = Genre.new
@@ -8,7 +9,7 @@ class Admin::GenresController < ApplicationController
   def create
     @genre = Genre.new(genre_params)
     @genre.save
-    flash[:alert] = "新しいジャンルを追加しました。"
+    flash[:notice] = "新しいジャンルを追加しました。"
     redirect_to admin_genres_path
   end
 
@@ -17,15 +18,16 @@ class Admin::GenresController < ApplicationController
   end
 
   def update
-    @genre=Genre.find(params[:id])
+    @genre = Genre.find(params[:id])
     @genre.update(genre_params)
+    flash[:notice] = "ジャンルを更新しました。"
     redirect_to admin_genres_path
   end
 
   def destroy
     @genre = Genre.find(params[:id])
     @genre.destroy
-    flash[:alert] = "ジャンルを削除しました。"
+    flash[:notice] = "ジャンルを削除しました。"
     redirect_to admin_genres_path
   end
 

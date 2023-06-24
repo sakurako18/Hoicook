@@ -1,4 +1,6 @@
   <div class="container">
+          <p><font color=”#008000”><%= flash[:notice] %></font></p>
+      <p><font color=”#800000”><%= flash[:warning] %></font></p>
     <% if @recipe.user == current_user %>
     <div class="row">
       <div class="col-md-auto ml-auto">
@@ -15,9 +17,6 @@
       </div>
         <% end %>
 
-      <p><font color=”#008000”><%= flash[:notice] %></font></p>
-      <p><font color=”#800000”><%= flash[:warning] %></font></p>
-
       <div class="container">
     <div class="row">
       <div class="col-md-3">
@@ -27,17 +26,16 @@
               <%= link_to user_recipe_favorites_path(@recipe), method: :delete do %>
               <i class="fas fa-bookmark"></i>
               <%= @recipe.favorites.count %>
-            <% end %>
-
+              <% end %>
             <% else %>
               <%= link_to user_recipe_favorites_path(@recipe), method: :post do %>
               <i class="far fa-bookmark"></i>
               <%= @recipe.favorites.count %>
+              <% end %>
             <% end %>
-            <% end %>
+          <% else %>
+            <i class="fas fa-bookmark"></i><%= @recipe.favorites.count %>
           <% end %>
-
-
 
         <%= link_to user_recipe_path(@recipe.id) do %>
           <% if @recipe.image.attached? %>

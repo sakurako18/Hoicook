@@ -9,7 +9,8 @@ class User::RecipesController < ApplicationController
     end
 
     if params[:tag_ids]
-      recipes = []
+      # recipes = []
+      recipes = @recipes.to_a
       params[:tag_ids].each do |key, value|
         if value == "1"
           Tag.find_by(name: key).recipes.each do |recipe|
@@ -19,6 +20,7 @@ class User::RecipesController < ApplicationController
          # @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
         end
       end
+       recipes = recipes.select{ |e| recipes.count(e) > 1 }.uniq
        @recipes = Kaminari.paginate_array(recipes).page(params[:page]).per(10)
     end
 
@@ -49,7 +51,7 @@ class User::RecipesController < ApplicationController
         tag_ids.each do |tag_id|
           RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
         end
-        flash[:notice] = "新しくレシピを投稿しました"
+      flash[:notice] = "新しくレシピを投稿しました"
       redirect_to user_recipe_path(@recipe.id)
     else
       render :new

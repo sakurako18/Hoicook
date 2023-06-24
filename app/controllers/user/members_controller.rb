@@ -1,9 +1,8 @@
 class User::MembersController < ApplicationController
 
-# before_action :authenticate_user!
-
   def show
-    @users = current_user
+    @user = current_user
+    @comments = Comment.where(user_id: @user.id)
   end
 
   def edit
