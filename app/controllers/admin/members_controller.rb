@@ -1,4 +1,5 @@
 class Admin::MembersController < ApplicationController
+  before_action :authenticate_admin!, onry: [:index, :edit, :show, :update], unless: :devise_controller?
 
   def index
     @users = User.all

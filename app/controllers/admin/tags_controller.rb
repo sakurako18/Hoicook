@@ -1,5 +1,5 @@
 class Admin::TagsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :create, :destroy], unless: :devise_controller?
+  before_action :authenticate_user!, onry: [:index, :create, :destroy], unless: :devise_controller?
 
   def index
     @tag = Tag.new

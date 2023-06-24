@@ -1,5 +1,5 @@
 class Admin::GenresController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :create, :edit, :update, :destroy], unless: :devise_controller?
+  before_action :authenticate_admin!, onry: [:index, :create, :edit, :update, :destroy], unless: :devise_controller?
 
   def index
     @genre = Genre.new

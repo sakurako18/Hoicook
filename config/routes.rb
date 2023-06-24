@@ -26,7 +26,6 @@ Rails.application.routes.draw do
 
   namespace :user do
     get "/" => "homes#top"
-    get "/about" => "homes#about"
     get "/user_index" => "recipes#user_index"
     get "/favorite_recipes" => "favorites#favorite_recipes"
 

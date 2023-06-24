@@ -1,5 +1,5 @@
 class User::RecipesController < ApplicationController
-
+  before_action :authenticate_user!, except: [:index, :user_index, :show], if: :admin_signed_in?
 
   def index
     @recipes = Recipe.where(post_status: true).page(params[:page])

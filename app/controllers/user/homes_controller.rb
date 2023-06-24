@@ -4,8 +4,4 @@ class User::HomesController < ApplicationController
 
   end
 
-  def about
-
-  end
-
 end

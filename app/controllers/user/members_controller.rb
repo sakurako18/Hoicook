@@ -1,4 +1,5 @@
 class User::MembersController < ApplicationController
+  before_action :authenticate_user!, onry: [:show, :edit, :update], unless: :devise_controller?
 
   def show
     @user = current_user
@@ -17,11 +18,6 @@ class User::MembersController < ApplicationController
         render 'edit'
     end
   end
-
-  def destroy
-
-  end
-
 
 private
   def user_params
