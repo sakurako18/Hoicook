@@ -1,6 +1,5 @@
 class User::CommentsController < ApplicationController
-  before_action :authenticate_admin!, only: [:create, :destroy], if: :admin_signed_in?
-  before_action :authenticate_user!, only: [:create, :destroy], if: :user_signed_in?
+  before_action :authenticate_check, except: [:create, :destroy]
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
@@ -15,21 +14,17 @@ class User::CommentsController < ApplicationController
     redirect_to user_recipe_path(params[:recipe_id])
   end
 
+
   private
+
+  def authenticate_check
+    return if admin_signed_in?
+    return if user_signed_in?
+    authenticate_user!
+  end
 
   def comment_params
     params.require(:comment).permit(:comment, :recipe_id)
   end
-
-  # def authenticate_admin!
-  #   p("called admin")
-  #   super
-  # end
-
-  # def authenticate_user!
-  #   p("called user")
-  #   super
-  # end
-
 
 end
