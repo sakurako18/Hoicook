@@ -1,5 +1,6 @@
 class User::CommentsController < ApplicationController
-  before_action :authenticate_user!, onry: [:create, :destroy], unless: :devise_controller?
+  before_action :authenticate_admin!, only: [:create, :destroy], if: :admin_signed_in?
+  before_action :authenticate_user!, only: [:create, :destroy], if: :user_signed_in?
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
