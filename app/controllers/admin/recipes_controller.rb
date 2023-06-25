@@ -1,5 +1,5 @@
 class Admin::RecipesController < ApplicationController
-  before_action :authenticate_admin!, onry: [:index, :new, :create, :edit, :update, :destroy], unless: :devise_controller?
+  before_action :authenticate_admin!, only: [:index, :new, :create, :edit, :update, :destroy], unless: :devise_controller?
 
   def index
     @recipes = Recipe.page(params[:page])
