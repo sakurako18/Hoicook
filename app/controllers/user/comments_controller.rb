@@ -21,15 +21,15 @@ class User::CommentsController < ApplicationController
     params.require(:comment).permit(:comment, :recipe_id)
   end
 
-  def authenticate_admin!
-    p("called admin")
-    super
-  end
+  # def authenticate_admin!
+  #   p("called admin")
+  #   super
+  # end
 
-  def authenticate_user!
-    p("called user")
-    super
-  end
+  # def authenticate_user!
+  #   p("called user")
+  #   super
+  # end
 
 
 end

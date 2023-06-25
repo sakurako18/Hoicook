@@ -1,7 +1,7 @@
 class User::RecipesController < ApplicationController
-  before_action :authenticate_admin!, except: [:user_index, :show], if: :admin_signed_in?
-  before_action :authenticate_user!, except: [:user_index, :show], if: :user_signed_in?
-
+  # before_action :authenticate_admin!, except: [:user_index, :show], if: :check_admin_or_user
+  # before_action :authenticate_user!, except: [:user_index, :show], if: :check_admin_or_use
+  before_action :authenticate_check, except: [:index, :user_index, :show]
 
   def index
     @recipes = Recipe.where(post_status: true).page(params[:page])
@@ -104,6 +104,19 @@ class User::RecipesController < ApplicationController
   end
 
   private
+
+  def authenticate_check
+    return if admin_signed_in?
+    return if user_signed_in?
+    authenticate_user!
+  end
+
+  def check_admin_or_user
+    return true if admin_signed_in?
+    return true if user_signed_in?
+    return false
+  end
+
   def recipe_params
     params.require(:recipe).permit(:image, :name, :introduction, :number_of_people, :how_to_make, :genre_id, :post_status,
                                   recipe_ingredients_attributes:[:id, :ingredient, :ingredient_amount, :_destroy])
