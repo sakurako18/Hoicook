@@ -18,7 +18,7 @@ class User < ApplicationRecord
       user.password_confirmation = user.password
       user.user_name = 'ゲストユーザー'
       user.last_name = 'サンプル'
-      user.first_nam = '太郎'
+      user.first_name = '太郎'
     end
   end
 
