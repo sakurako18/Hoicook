@@ -1,4 +1,8 @@
   <div class="container">
+    <% if @tags %>
+    <%= @tags %>
+    <%= link_to "もう一度検索する", user_recipes_path, class:"navbar-brand" %>
+    <% else %>
     <p><h5>月齢</h5></p>
       <%= form_with model: @recipe, url: user_recipes_path, method: :get do |f| %>
         <% Tag.all.each do |t| %>
@@ -13,4 +17,5 @@
 
         <p><%= f.submit '検索' %></p>
       <% end %>
+    <% end %>
   </div>

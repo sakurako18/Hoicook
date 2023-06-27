@@ -4,24 +4,42 @@ class User::RecipesController < ApplicationController
   def index
     @recipes = Recipe.where(post_status: true).page(params[:page])
     @genres = Genre.all
-    if params[:genre_ids]
-      @recipes = @recipes.where(genre_id: params[:genre_ids]).page(params[:page])
-    end
-
-    if params[:tag_ids]
-      # recipes = []
+    if params[:genre_ids] && params[:tag_ids]
+      @recipes = @recipes.where(genre_id: params[:genre_ids])
       recipes = @recipes.to_a
       params[:tag_ids].each do |key, value|
         if value == "1"
           Tag.find_by(name: key).recipes.each do |recipe|
+            # p key
             recipes.push(recipe)
           end
 
          # @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
         end
       end
-       recipes = recipes.select{ |e| recipes.count(e) > 1 }.uniq
+       recipes = recipes.select{ |e| recipes.count(e) > 0 }.uniq
        @recipes = Kaminari.paginate_array(recipes).page(params[:page]).per(10)
+       params[:tag_ids] = []
+    elsif params[:genre_ids]
+      @recipes = @recipes.where(genre_id: params[:genre_ids]).page(params[:page])
+
+    elsif params[:tag_ids]
+      # p params[:tag_ids]
+      # recipes = []
+      recipes = @recipes.to_a
+      params[:tag_ids].each do |key, value|
+        if value == "1"
+          Tag.find_by(name: key).recipes.each do |recipe|
+            # p key
+            recipes.push(recipe)
+          end
+
+         # @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
+        end
+      end
+       recipes = recipes.select{ |e| recipes.count(e) > 0 }.uniq
+       @recipes = Kaminari.paginate_array(recipes).page(params[:page]).per(10)
+       params[:tag_ids] = []
     end
 
 
