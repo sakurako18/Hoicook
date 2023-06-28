@@ -12,10 +12,11 @@ class User::MembersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update(user_params)
+    if @user.update!(user_params)
        redirect_to user_member_path(@user)
     else
         render 'edit'
+
     end
   end
 

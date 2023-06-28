@@ -7,10 +7,10 @@ Admin.create!(
 
 
 User.create!([
-  { email: 'tanaka@example.com', user_name: 'いちご保育園', first_name: '田中', last_name: 'A美園長', password: 'password', is_deleted: 'false' },
-  { email: 'satou@example.com', user_name: 'サトウ', first_name: '佐藤', last_name: '太郎', password: 'password', is_deleted: 'false' },
-  { email: 'yamada@example.com', user_name: 'ヤマダ', first_name: '山田', last_name: '花子', password: 'password', is_deleted: 'false' },
-  { email: 'kobayashi@example.com', user_name: 'コバヤシ', first_name: '小林', last_name: '尚子', password: 'password', is_deleted: 'false' },
+  { email: 'tanaka@example.com', user_name: 'いちご保育園', last_name: '田中', first_name: 'A美園長', password: 'password', is_deleted: 'false' },
+  { email: 'satou@example.com', user_name: 'サトウ', last_name: '佐藤', first_name: '太郎', password: 'password', is_deleted: 'false' },
+  { email: 'yamada@example.com', user_name: 'ヤマダ', last_name: '山田', first_name: '花子', password: 'password', is_deleted: 'false' },
+  { email: 'kobayashi@example.com', user_name: 'コバヤシ', last_name: '小林', first_name: '尚子', password: 'password', is_deleted: 'false' },
 ])
 
 Tag.create!([
@@ -60,7 +60,7 @@ Comment.create!([
   { user_id:3 ,recipe_id:2 ,comment: '作ってみたいです' },
   { user_id:1 ,recipe_id:3 ,comment: '保育園でも参考にしてみますね！' },
   { user_id:4 ,recipe_id:2 ,comment: '山芋のレシピありがたいです' },
-  { user_id:2 ,recipe_id:5 ,comment: '辛くなくて食べやすそう' },
+  { user_id:2 ,recipe_id:5 ,comment: 'ワカメ苦手な子だから、作ってみたいと思います' },
   { user_id:4 ,recipe_id:4 ,comment: 'うちの子いっぱい食べました！' }
 ])
 
