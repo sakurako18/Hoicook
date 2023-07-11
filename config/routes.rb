@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :members, only: [:index, :edit, :show, :update,]
   end
 
-  namespace :user do
+  scope module: :user do
     get "/" => "homes#top"
     get "/user_index" => "recipes#user_index"
     get "/favorite_recipes" => "favorites#favorite_recipes"
