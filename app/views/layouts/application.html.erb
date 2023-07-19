@@ -16,7 +16,7 @@
           <div class="container">
             <div class="text-center mb-3 mb-lg-0">
               <span class="d-block">ひとくち食べるきっかけに</span>
-              <%= link_to new_recipe_path, class:"navbar-brand" do %>
+              <%= link_to recipes_path, class:"navbar-brand" do %>
                 <%= image_tag 'logo.png', size: '120x120' %>
               <% end %>
             </div>
@@ -94,7 +94,7 @@
                   <% end %>
                 </li>
                 <li class="nav-item ml-auto">
-                  <%= link_to user_recipes_path, class:'nav-link' do %>
+                  <%= link_to recipes_path, class:'nav-link' do %>
                   <i class="fas fa-book-open"></i> レシピ
                   <% end %>
                 </li>
