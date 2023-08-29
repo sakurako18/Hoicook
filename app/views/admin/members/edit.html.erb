@@ -21,11 +21,11 @@
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-sm-6 form-control-static", style: "margin: 10px;" %>
           </div>
           <div class="col-md-12 row">
-            <%= f.label :"会員ステータス", class: "col-md-2 control-label", style: "margin: 10px;" %>
+            <%= f.label "会員ステータス", class: "col-md-2 control-label", style: "margin: 10px;" %>
             <%= f.radio_button :is_deleted, :false %>
-            <%= f.label :"有効", class: "col-md-2 control-label", style: "margin: 10px;" %>
+            <%= f.label :is_deleted, "有効", value: false, class: "col-md-2 control-label", style: "margin: 10px;" %>
             <%= f.radio_button :is_deleted, :true %>
-            <%= f.label :"退会", class: "col-md-2 control-label", style: "margin: 10px;" %>
+            <%= f.label :is_deleted, "退会", value: true, class: "col-md-2 control-label", style: "margin: 10px;" %>
           </div>
 
         </div>

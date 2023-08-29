@@ -2,21 +2,20 @@ class User::RecipesController < ApplicationController
   before_action :authenticate_check, except: [:index, :show]
 
   def index
-    @recipes = Recipe.where(post_status: true).page(params[:page])
+    @recipes = Recipe.where(post_status: true).page(params[:page]).order("id DESC")
     @genres = Genre.all
     if params[:genre_ids] && params[:tag_ids]
       @recipes = @recipes.where(genre_id: params[:genre_ids])
       recipes = @recipes.to_a
       params[:tag_ids].each do |key, value|
         if value == "1"
-          Tag.find_by(name: key).recipes.each do |recipe|
+          Tag.find_by(tag_name: key).recipes.each do |recipe|
             # p key
             recipes.push(recipe)
           end
-
          # @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
         end
-      end
+    end
        recipes = recipes.select{ |e| recipes.count(e) > 0 }.uniq
        @recipes = Kaminari.paginate_array(recipes).page(params[:page]).per(10)
        params[:tag_ids] = []
@@ -33,7 +32,6 @@ class User::RecipesController < ApplicationController
             # p key
             recipes.push(recipe)
           end
-
          # @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
         end
       end
@@ -41,8 +39,6 @@ class User::RecipesController < ApplicationController
        @recipes = Kaminari.paginate_array(recipes).page(params[:page]).per(10)
        params[:tag_ids] = []
     end
-
-
   end
 
   def user_index
@@ -70,7 +66,7 @@ class User::RecipesController < ApplicationController
           RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
         end
       flash[:notice] = "新しくレシピを投稿しました"
-      redirect_to user_recipe_path(@recipe.id)
+      redirect_to recipe_path(@recipe.id)
     else
       render :new
     end
@@ -100,7 +96,7 @@ class User::RecipesController < ApplicationController
         RecipeTagRelation.create(recipe_id: @recipe.id, tag_id: tag_id)
       end
       flash[:notice] = "レシピを更新しました"
-    redirect_to user_recipe_path(@recipe.id)
+    redirect_to recipe_path(@recipe.id)
   end
 
   def destroy
@@ -113,9 +109,9 @@ class User::RecipesController < ApplicationController
     @recipe.destroy
     flash[:notice] = "レシピを削除しました"
     if current_user == @user
-     redirect_to user_user_index_path
+     redirect_to user_index_path
     else
-     redirect_to user_recipes_path
+     redirect_to recipes_path
     end
   end
 
@@ -128,7 +124,7 @@ class User::RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:image, :name, :introduction, :number_of_people, :how_to_make, :genre_id, :post_status,
+    params.require(:recipe).permit(:image, :recipe_name, :introduction, :number_of_people, :how_to_make, :genre_id, :post_status,
                                   recipe_ingredients_attributes:[:id, :ingredient, :ingredient_amount, :_destroy])
   end
 

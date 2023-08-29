@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_18_070522) do
+ActiveRecord::Schema.define(version: 2023_08_26_074154) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2023_06_18_070522) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "name"
+    t.string "genre_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2023_06_18_070522) do
 
   create_table "recipes", force: :cascade do |t|
     t.integer "genre_id"
-    t.string "name", null: false
+    t.string "recipe_name", null: false
     t.text "introduction"
     t.integer "number_of_people"
     t.text "how_to_make"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2023_06_18_070522) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
+    t.string "tag_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -17,7 +17,7 @@ class User::TagsController < ApplicationController
 　　@tag = Tag.new(article_params)
     if @tag.valid?
       @tag.save
-      redirect_to user_recipe_path(@recipe.id)
+      redirect_to recipe_path(@recipe.id)
     else
       render :new
     end

@@ -6,7 +6,7 @@ class User::SessionsController < Devise::SessionsController
   def new_guest
     user = User.guest
     sign_in user   # ユーザーをログインさせる
-    redirect_to user_recipes_path, notice: 'ゲストユーザーとしてログインしました'
+    redirect_to recipes_path, notice: 'ゲストユーザーとしてログインしました'
   end
 
   # GET /resource/sign_in
@@ -29,7 +29,7 @@ class User::SessionsController < Devise::SessionsController
    end
 
   def after_sign_in_path_for(resource)
-    user_recipes_path
+    recipes_path
   end
 
   def after_sign_out_path_for(resource)

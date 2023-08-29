@@ -15,7 +15,7 @@ class User::RegistrationsController < Devise::RegistrationsController
    end
 
   def after_sign_in_path_for(resource)
-    user_recipes_path
+    recipes_path
   end
 
   def after_sign_out_path_for(resource)

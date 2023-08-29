@@ -2,14 +2,26 @@
     <div class="row">
       <div class="col-md-8 col-xl-8 mx-auto">
       <p><font color=”#008000”><%= flash[:notice] %></font></p>
+
       <h2>タグ一覧・追加</h2>
 
+      <% if @tag.errors.any? %>
+        <%= @tag.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @tag.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
       <%= form_with model: @tag, url: admin_tags_path, method: :post do |f| %>
+
          <table class="table">
           <thead>
             <tr>
-              <td><%= f.text_field :name, class: "mr-3" %></td>
-              <td><%= f.submit 'タグを追加', class: "mr-5" %></td>
+              <td><%= f.label :"タグ名", class: "mr-3" %></td>
+              <td><%= f.text_field :tag_name, class: "mr-5" %></td>
+              <td><%= f.submit '新規登録', class: "btn btn-success" %></td>
             </tr>
           </thead>
         </table>
@@ -25,7 +37,7 @@
             <% @tags.each do |tag| %>
           <tbody>
             <tr>
-              <td><%= tag.name %></td>
+              <td><%= tag.tag_name %></td>
               <td>
                 <%= link_to "削除",admin_tag_path(tag.id), method: :delete, class: "btn btn-danger" %>
               </td>

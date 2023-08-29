@@ -6,7 +6,7 @@
       <div class="col-md-12 col-xl-12">
 
         <div class="text-right">
-          <%= link_to "新規登録", new_user_recipe_path, class:"btn btn-lg btn-success" %>
+          <%= link_to "新規登録", new_recipe_path, class:"btn btn-lg btn-success" %>
         </div>
 
         <div class="row">
@@ -37,19 +37,21 @@
             <%= recipe.id %>
           </div>
           <div class="col d-flex align-items-center">
-            <% if recipe.image.attached? %>
-              <%= image_tag recipe.image, size: '100x100' %>
-            <% else %>
-              <%= image_tag 'no_image.png', size: '100x100' %>
+            <%= link_to recipe_path(recipe) do %>
+              <% if recipe.image.attached? %>
+                <%= image_tag recipe.image, size: '100x100' %>
+              <% else %>
+                <%= image_tag 'no_image.png', size: '100x100' %>
+              <% end %>
             <% end %>
           </div>
           <div class="col d-flex align-items-center">
-            <%= link_to user_recipe_path(recipe), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" do %>
-              <%= recipe.name %>
+            <%= link_to recipe_path(recipe), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" do %>
+              <%= recipe.recipe_name %>
             <% end %>
           </div>
           <div class="col d-flex align-items-center">
-            <%= recipe.genre.name %>
+            <%= recipe.genre.genre_name %>
           </div>
           <div class="col d-flex align-items-center">
             <%= recipe.favorites.count %>

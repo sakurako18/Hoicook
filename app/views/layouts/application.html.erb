@@ -65,17 +65,17 @@
                   <%= render 'layouts/search', searches: @searches %>
                 </li>
                 <li class="nav-item ml-auto">
-                  <%= link_to user_member_path(current_user), class:'nav-link' do %>
+                  <%= link_to member_path(current_user), class:'nav-link' do %>
                   <i class="fas fa-user-circle"></i> <%= current_user.user_name %>
                   <% end %>
                 </li>
                 <li class="nav-item ml-auto">
-                  <%= link_to user_user_index_path, class:'nav-link' do %>
+                  <%= link_to user_index_path, class:'nav-link' do %>
                   <i class="fas fa-book-open"></i> My レシピ
                   <% end %>
                 </li>
                 <li class="nav-item ml-auto">
-                  <%= link_to user_favorite_recipes_path, class:'nav-link' do %>
+                  <%= link_to favorite_recipes_path, class:'nav-link' do %>
                   <i class="fas fa-bookmark"></i> お気に入り
                   <% end %>
                 </li>
@@ -113,9 +113,6 @@
           </div>
         </div>
       </header>
-    </body>
-
-    <body>
-      <%= yield %>
+        <%= yield %>
     </body>
   </html>

@@ -10,11 +10,11 @@ class Recipe < ApplicationRecord
   has_many :tags, through: :recipe_tag_relations, dependent: :destroy
   accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 
-  validates :name, presence: true
+  validates :recipe_name, presence: true
   validates :introduction, presence: true
   validates :number_of_people, presence: true
   validates :how_to_make, presence: true
-  validates :post_status, presence: true
+  validates :post_status, inclusion: {in: [true, false]}
   validates :genre_id, presence: true
 
   def favorited_by?(user)

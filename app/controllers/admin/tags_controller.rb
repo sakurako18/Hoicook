@@ -8,12 +8,12 @@ class Admin::TagsController < ApplicationController
 
   def create
     @tag = Tag.new(tag_params)
-    if @tag.valid?
-      @tag.save
+    if @tag.save
       flash[:notice] = "新しいタグを追加しました。"
       redirect_to admin_tags_path
     else
-      render :new
+      @tags = Tag.all
+      render :index
     end
   end
 
@@ -27,7 +27,7 @@ class Admin::TagsController < ApplicationController
  private
 
   def tag_params
-    params.require(:tag).permit(:name)
+    params.require(:tag).permit(:tag_name)
   end
 
 end

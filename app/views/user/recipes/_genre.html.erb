@@ -4,15 +4,16 @@
     <!--< %= @tags %>-->
     <!--< %= link_to "もう一度検索する", user_recipes_path, class:"navbar-brand" %>-->
     <!--< % else %>-->
+    
     <p><h5>月齢</h5></p>
-      <%= form_with model: @recipe, url: user_recipes_path, method: :get do |f| %>
+      <%= form_with model: @recipe, url: recipes_path, method: :get do |f| %>
         <% Tag.all.each do |t| %>
-          <%= check_box :tag_ids, t.name %> <%= t.name %><br>
+          <%= check_box :tag_ids, t.tag_name %> <%= t.tag_name %><br>
         <% end %>
 
     <p><h5>ジャンル検索</h5></p>
 
-        <%= f.collection_check_boxes(:genre_ids, @genres, :id, :name) do |b| %>
+        <%= f.collection_check_boxes(:genre_ids, @genres, :id, :genre_name) do |b| %>
           <%= b.label { b.check_box + b.text } %>
         <% end %>
 

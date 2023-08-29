@@ -22,8 +22,8 @@
             <tbody>
               <% @comments.each do |comment| %>
                 <tr>
-                  <td><%= link_to comment.recipe.name, user_recipe_path(comment.recipe.id), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %>(ID:<%= comment.recipe_id %>)</td>
-                  <td><%= link_to comment.comment, user_recipe_path(comment.recipe.id), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %></td>
+                  <td><%= link_to comment.recipe.name, user_index_path(comment.recipe.id), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %>(ID:<%= comment.recipe_id %>)</td>
+                  <td><%= link_to comment.comment, user_index_path(comment.recipe.id), style: "font-family: HiraMinPro-W6; color: #000000; margin: 30px 0;" %></td>
                   <td><%= comment.user.user_name %>(<%= comment.user.last_name + " " + comment.user.first_name %>)</td>
                   <td><%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
                 </tr>
